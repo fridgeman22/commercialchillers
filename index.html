@@ -488,12 +488,25 @@
       </div>
     </div>
 
-    <div class="cat-card" onclick="selectCategory('Undercounter Fridge')">
-      <div class="cat-img">📦</div>
+    <div class="cat-card" onclick="openModal('mcu211')" style="cursor:pointer;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+        <img src="images/mcu211.jpg" alt="Precision MCU 211 Gastronorm Counter" style="width:100%;height:100%;object-fit:contain;padding:16px;">
+      </div>
       <div class="cat-body">
-        <h3>Undercounter Units</h3>
-        <p>Space-efficient undercounter fridges and freezers including Precision Refrigeration's HPU/LPU and space saver range. Ideal for bars, cafes, and kitchens where space is at a premium.</p>
-        <div class="price-hint">Click to enquire →</div>
+        <h3>Gastronorm Counter — 2 Door</h3>
+        <p style="margin-bottom:14px;">Precision MCU 211 670 Series GN1/1 counter. Available as fridge or freezer. Multiple worktop and drawer options available.</p>
+        <div style="border-top:1px solid var(--border);padding-top:12px;margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:600;">MCU 211 — Fridge -2/+4°C</span>
+            <span style="font-size:15px;font-weight:700;color:#16a34a;">£4,345</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;font-weight:600;">LCU 211 — Freezer -18/-22°C</span>
+            <span style="font-size:15px;font-weight:700;color:#16a34a;">£4,905</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-light);margin-top:8px;">All prices ex. VAT · Click for full specs</div>
+        </div>
+        <div class="btn-primary" style="width:100%;justify-content:center;font-size:14px;pointer-events:none;">Buy Now →</div>
       </div>
     </div>
     <div class="cat-card" onclick="selectCategory('Cold Room / Ice Machine')">
@@ -821,6 +834,46 @@ const products = {
       { name: 'Left hand hinged door',                                         price: 'Included' },
       { name: 'Adjustable legs',                                               price: 'Included' },
       { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)',       price: '£495'   },
+    ]
+  },
+  'mcu211': {
+    name: 'Precision MCU 211',
+    subtitle: 'Gastronorm Counter — 2 Door',
+    img: 'images/mcu211.jpg',
+    variants: [
+      { name: 'MCU 211 — Fridge -2/+4°C', price: '£4,345' },
+      { name: 'LCU 211 — Freezer -18/-22°C', price: '£4,905' },
+    ],
+    specs: [
+      ['Type', 'Gastronorm Counter 670 Series GN1/1'],
+      ['Temperature', '-2/+4°C (fridge) · -18/-22°C (freezer)'],
+      ['Doors', '2 × solid doors'],
+      ['Width', '1350 mm'],
+      ['Depth', '670 mm'],
+      ['Height', '865 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'GN pans not included. Multiple worktop and drawer options available.',
+    accessories: [
+      { name: 'Shelf & slides set',                          price: '£94'    },
+      { name: 'St/st shelf & slides set',                    price: '£184'   },
+      { name: 'Tray slides pair',                            price: '£53'    },
+      { name: 'Bank of 2 drawers (H)',                       price: '£749'   },
+      { name: 'Bank of 3 drawers (T)',                       price: '£1,219' },
+      { name: 'Gastronorm pan bridging bar',                 price: '£30'    },
+      { name: '900mm counter height',                        price: '£284'   },
+      { name: 'Raised pan holder 1/4°C (4× GN1/3)',         price: '£1,239' },
+      { name: 'Countertop well 1/4°C (4× GN1/3)',           price: '£1,045' },
+      { name: 'Insulated well/pan lid',                      price: '£664'   },
+      { name: 'Extra deep worktop up to 250mm',              price: '£357'   },
+      { name: 'Extra wide worktop up to 250mm',              price: '£658'   },
+      { name: 'Splash back 55mm one piece',                  price: '£990'   },
+      { name: 'Splash back 55mm bolt-on',                    price: '£330'   },
+      { name: 'Right hand condensing unit',                  price: '£166'   },
+      { name: 'Door/drawer lock (each)',                     price: '£40'    },
+      { name: 'Stainless steel back & unit housing',         price: '£284'   },
+      { name: 'Precision Connect — WiFi cloud monitoring',   price: '£495'   },
     ]
   },
   'mpu401': {

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DCR Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; }
+
+    /* LOGIN */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    }
+    .login-box {
+      background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+      padding: 48px 40px; width: 100%; max-width: 380px;
+    }
+    .login-logo { font-size: 20px; font-weight: 800; letter-spacing: 3px; border: 2px solid #e6edf3; padding: 5px 10px; display: inline-block; margin-bottom: 32px; }
+    .login-box h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .login-box p { font-size: 13px; color: #8b949e; margin-bottom: 28px; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 12px; font-weight: 600; color: #8b949e; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+    .field input {
+      width: 100%; padding: 11px 14px; background: #0d1117;
+      border: 1px solid #30363d; border-radius: 7px; color: #e6edf3;
+      font-size: 14px; font-family: 'Inter', sans-serif; outline: none;
+    }
+    .field input:focus { border-color: #1d6fa4; }
+    .login-btn {
+      width: 100%; padding: 13px; background: #1d6fa4; color: #fff;
+      border: none; border-radius: 7px; font-size: 14px; font-weight: 700;
+      cursor: pointer; font-family: 'Inter', sans-serif; margin-top: 8px;
+    }
+    .login-btn:hover { background: #2589c7; }
+    .login-error { color: #f85149; font-size: 13px; margin-top: 12px; display: none; text-align: center; }
+
+    /* ADMIN PANEL */
+    #admin-panel { display: none; }
+
+    .topbar {
+      background: #161b22; border-bottom: 1px solid #30363d;
+      padding: 0 32px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .topbar-logo { font-size: 14px; font-weight: 800; letter-spacing: 2px; border: 1.5px solid #e6edf3; padding: 4px 8px; }
+    .topbar-title { font-size: 14px; color: #8b949e; }
+    .topbar-actions { display: flex; gap: 10px; align-items: center; }
+    .btn-sm {
+      padding: 7px 16px; border-radius: 6px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Inter', sans-serif; border: none;
+    }
+    .btn-blue { background: #1d6fa4; color: #fff; }
+    .btn-blue:hover { background: #2589c7; }
+    .btn-ghost { background: transparent; color: #8b949e; border: 1px solid #30363d; }
+    .btn-ghost:hover { color: #e6edf3; border-color: #8b949e; }
+    .btn-green { background: #238636; color: #fff; }
+    .btn-green:hover { background: #2ea043; }
+    .btn-red { background: #b91c1c; color: #fff; }
+
+    .layout { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 60px); }
+
+    .sidebar {
+      background: #161b22; border-right: 1px solid #30363d; padding: 24px 0;
+    }
+    .sidebar-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #8b949e; padding: 0 20px; margin-bottom: 8px; margin-top: 20px; }
+    .sidebar-label:first-child { margin-top: 0; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 20px; font-size: 13px; font-weight: 500; color: #8b949e;
+      cursor: pointer; transition: all 0.15s; border-left: 2px solid transparent;
+    }
+    .nav-item:hover { color: #e6edf3; background: rgba(255,255,255,0.04); }
+    .nav-item.active { color: #e6edf3; border-left-color: #1d6fa4; background: rgba(29,111,164,0.1); }
+    .nav-item .icon { font-size: 15px; width: 20px; }
+
+    .main { padding: 32px; overflow-y: auto; }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .page-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .page-sub { font-size: 13px; color: #8b949e; margin-bottom: 32px; }
+
+    .card {
+      background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+      padding: 24px; margin-bottom: 20px;
+    }
+    .card-title { font-size: 14px; font-weight: 700; margin-bottom: 16px; color: #e6edf3; display: flex; align-items: center; gap: 8px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; color: #8b949e; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.8px; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 10px 12px; background: #0d1117;
+      border: 1px solid #30363d; border-radius: 6px; color: #e6edf3;
+      font-size: 13px; font-family: 'Inter', sans-serif; outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: #1d6fa4; }
+    .form-group textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+    .char-count { font-size: 11px; color: #8b949e; text-align: right; margin-top: 4px; }
+
+    .save-bar {
+      position: fixed; bottom: 0; left: 220px; right: 0;
+      background: #161b22; border-top: 1px solid #30363d;
+      padding: 14px 32px; display: none;
+      justify-content: space-between; align-items: center; z-index: 5;
+    }
+    .save-bar.visible { display: flex; }
+    .save-bar-msg { font-size: 13px; color: #8b949e; }
+
+    /* Products table */
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8b949e; border-bottom: 1px solid #30363d; }
+    td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid #21262d; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+    .badge.live { background: rgba(35,134,54,0.2); color: #3fb950; }
+    .badge.hidden { background: rgba(255,255,255,0.06); color: #8b949e; }
+
+    .add-product-form { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #30363d; }
+    .add-product-form.visible { display: block; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 80px; right: 24px;
+      background: #238636; color: #fff; padding: 12px 20px;
+      border-radius: 8px; font-size: 13px; font-weight: 600;
+      opacity: 0; transform: translateY(10px);
+      transition: all 0.3s; pointer-events: none; z-index: 999;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px; }
+    .stat-card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px 24px; }
+    .stat-card .n { font-size: 32px; font-weight: 800; letter-spacing: -1px; }
+    .stat-card .l { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+    @media (max-width: 768px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .save-bar { left: 0; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">DCR LTD</div>
+    <h2>Admin Login</h2>
+    <p>Sign in to manage your website content</p>
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="username" placeholder="admin" autocomplete="username">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
+    </div>
+    <button class="login-btn" onclick="login()">Sign In →</button>
+    <div class="login-error" id="loginError">Incorrect username or password</div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:20px;">
+      <div class="topbar-logo">DCR LTD</div>
+      <span class="topbar-title">Website Admin</span>
+    </div>
+    <div class="topbar-actions">
+      <a href="/" target="_blank" class="btn-sm btn-ghost">View Site ↗</a>
+      <button class="btn-sm btn-ghost" onclick="logout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-label">Main</div>
+      <div class="nav-item active" onclick="showPage('dashboard')"><span class="icon">📊</span> Dashboard</div>
+      <div class="nav-item" onclick="showPage('hero')"><span class="icon">🏠</span> Hero Section</div>
+      <div class="nav-item" onclick="showPage('contact')"><span class="icon">📞</span> Contact Details</div>
+      <div class="sidebar-label">Content</div>
+      <div class="nav-item" onclick="showPage('products')"><span class="icon">🧊</span> Products</div>
+      <div class="nav-item" onclick="showPage('whyus')"><span class="icon">⭐</span> Why Choose Us</div>
+      <div class="nav-item" onclick="showPage('repairs')"><span class="icon">🔧</span> Breakdown & Repairs</div>
+      <div class="nav-item" onclick="showPage('process')"><span class="icon">📋</span> How It Works</div>
+      <div class="sidebar-label">SEO & Settings</div>
+      <div class="nav-item" onclick="showPage('seo')"><span class="icon">🔍</span> SEO</div>
+      <div class="sidebar-label">Enquiries</div>
+      <div class="nav-item" onclick="showPage('enquiries')"><span class="icon">📬</span> Enquiries</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+      <!-- DASHBOARD -->
+      <div class="page active" id="page-dashboard">
+        <div class="page-title">Dashboard</div>
+        <div class="page-sub">Welcome back, Chris. Here's your site at a glance.</div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="n" style="color:#3fb950;">Live</div>
+            <div class="l">Site Status</div>
+          </div>
+          <div class="stat-card">
+            <div class="n">6</div>
+            <div class="l">Product Categories</div>
+          </div>
+          <div class="stat-card">
+            <div class="n" style="color:#1d6fa4;">↑</div>
+            <div class="l">SEO Optimised</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🌐 Live Site</div>
+          <p style="font-size:13px;color:#8b949e;margin-bottom:12px;">Your website is live and indexed. Share this link with customers.</p>
+          <a href="https://commercialchillers.co.uk" target="_blank" style="color:#1d6fa4;font-size:14px;font-weight:600;">https://commercialchillers.co.uk ↗</a>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📋 Quick Actions</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn-sm btn-blue" onclick="showPage('contact')">Update Phone/Email</button>
+            <button class="btn-sm btn-blue" onclick="showPage('hero')">Edit Hero Text</button>
+            <button class="btn-sm btn-blue" onclick="showPage('products')">Manage Products</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="page" id="page-hero">
+        <div class="page-title">Hero Section</div>
+        <div class="page-sub">Edit the main headline and description at the top of the page.</div>
+
+        <div class="card">
+          <div class="card-title">✏️ Headline</div>
+          <div class="form-group">
+            <label>Main Heading (Line 1)</label>
+            <input type="text" id="hero-line1" value="Commercial Chillers" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Main Heading (Line 2 — shown in blue)</label>
+            <input type="text" id="hero-line2" value="& Refrigerated Display Cabinets" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Subheading / Description</label>
+            <textarea id="hero-sub" oninput="markDirty(); updateCount(this,'hero-sub-count',180)">Top-of-the-range commercial chillers and refrigerated display cabinets supplied and quoted by DCR Ltd. Display fridges, undercounter units, prep counters, ice machines and cold rooms. Tailored to your exact requirements.</textarea>
+            <div class="char-count"><span id="hero-sub-count">0</span>/180 chars</div>
+          </div>
+          <div class="form-group">
+            <label>Badge Text (small label above heading)</label>
+            <input type="text" id="hero-badge" value="Commercial Chillers & Refrigerated Display Cabinets" oninput="markDirty()">
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="page" id="page-contact">
+        <div class="page-title">Contact Details</div>
+        <div class="page-sub">Update your phone number and email address shown on the site.</div>
+
+        <div class="card">
+          <div class="card-title">📞 Contact Information</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" id="contact-phone" value="07928 883860" oninput="markDirty()">
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="contact-email" value="fridgeman22@googlemail.com" oninput="markDirty()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Response Time (shown on site)</label>
+            <input type="text" id="contact-response" value="Same Day" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Call to Action Button Text</label>
+            <input type="text" id="contact-cta" value="Get a Free Quote →" oninput="markDirty()">
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="page" id="page-products">
+        <div class="page-title">Products</div>
+        <div class="page-sub">Manage your product categories. Click a row to edit, or add new ones.</div>
+
+        <div class="card">
+          <div class="card-title">🧊 Product Categories
+            <button class="btn-sm btn-blue" style="margin-left:auto" onclick="toggleAddProduct()">+ Add Category</button>
+          </div>
+          <table>
+            <tr>
+              <th>Icon</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <td>🧊</td><td>Display Refrigerators</td><td><span class="badge live">Live</span></td>
+              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Display Refrigerators')">Edit</button></td>
+            </tr>
+            <tr>
+              <td>🍽️</td><td>Prep Fridges & Counters</td><td><span class="badge live">Live</span></td>
+              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Prep Fridges & Counters')">Edit</button></td>
+            </tr>
+            <tr>
+              <td>📦</td><td>Undercounter Units</td><td><span class="badge live">Live</span></td>
+              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Undercounter Units')">Edit</button></td>
+            </tr>
+            <tr>
+              <td>🏭</td><td>Cold Rooms & Ice Machines</td><td><span class="badge live">Live</span></td>
+              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Cold Rooms & Ice Machines')">Edit</button></td>
+            </tr>
+            <tr>
+              <td>🍦</td><td>Display Freezers</td><td><span class="badge live">Live</span></td>
+              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Display Freezers')">Edit</button></td>
+            </tr>
+            <tr>
+              <td>🍺</td><td>Back Bar & Bottle Coolers</td><td><span class="badge live">Live</span></td>
+              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Back Bar & Bottle Coolers')">Edit</button></td>
+            </tr>
+          </table>
+
+          <div class="add-product-form" id="addProductForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Category Name</label>
+                <input type="text" id="new-product-name" placeholder="e.g. Wine Coolers">
+              </div>
+              <div class="form-group">
+                <label>Icon (emoji)</label>
+                <input type="text" id="new-product-icon" placeholder="🍷" style="max-width:80px;">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="new-product-desc" placeholder="Brief description of this product category..."></textarea>
+            </div>
+            <div style="display:flex;gap:10px;">
+              <button class="btn-sm btn-green" onclick="saveNewProduct()">Save Category</button>
+              <button class="btn-sm btn-ghost" onclick="toggleAddProduct()">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📸 Product Images</div>
+          <p style="font-size:13px;color:#8b949e;">Send product images and spec sheets to RICO and they'll be added to the site automatically. Or drop image URLs below.</p>
+          <div class="form-group" style="margin-top:16px;">
+            <label>Image URL (paste a direct link to an image)</label>
+            <input type="url" placeholder="https://example.com/fridge-image.jpg">
+          </div>
+        </div>
+      </div>
+
+      <!-- WHY US -->
+      <div class="page" id="page-whyus">
+        <div class="page-title">Why Choose Us</div>
+        <div class="page-sub">Edit the three selling points shown in the middle of the page.</div>
+
+        <div class="card">
+          <div class="card-title">⭐ Selling Point 1</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Icon</label>
+              <input type="text" id="why1-icon" value="🔧" oninput="markDirty()">
+            </div>
+            <div class="form-group">
+              <label>Heading</label>
+              <input type="text" id="why1-title" value="Engineers, Not Salespeople" oninput="markDirty()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="why1-desc" oninput="markDirty()">DCR Ltd are commercial refrigeration specialists. Our advice comes from years of hands-on engineering experience — not a commission target.</textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⭐ Selling Point 2</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Icon</label>
+              <input type="text" id="why2-icon" value="⭐" oninput="markDirty()">
+            </div>
+            <div class="form-group">
+              <label>Heading</label>
+              <input type="text" id="why2-title" value="Premium Equipment Only" oninput="markDirty()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="why2-desc" oninput="markDirty()">We supply top-of-the-range commercial refrigeration units built for demanding environments. Quality that lasts, from brands you can trust.</textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⭐ Selling Point 3</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Icon</label>
+              <input type="text" id="why3-icon" value="📋" oninput="markDirty()">
+            </div>
+            <div class="form-group">
+              <label>Heading</label>
+              <input type="text" id="why3-title" value="No-Hassle Procurement" oninput="markDirty()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="why3-desc" oninput="markDirty()">Tell us what you need, we handle the quote and sourcing. No chasing multiple suppliers. One point of contact, straightforward process.</textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENQUIRIES -->
+      <div class="page" id="page-enquiries">
+        <div class="page-title">Enquiries</div>
+        <div class="page-sub">All enquiries submitted via the website form are sent directly to your email at fridgeman22@googlemail.com.</div>
+
+        <div class="card">
+          <div class="card-title">📬 How Enquiries Work</div>
+          <p style="font-size:13px;color:#8b949e;line-height:1.7;">
+            When someone fills in the enquiry form on the website, their details are automatically sent to your email inbox as a pre-formatted message. You'll see their name, business, phone number, equipment needed and any notes.<br><br>
+            To change the email address enquiries go to, update it in the <strong style="color:#e6edf3;">Contact Details</strong> section.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">💡 Tips for Converting Leads</div>
+          <ul style="font-size:13px;color:#8b949e;line-height:2;padding-left:18px;">
+            <li>Call back within 2 hours — response time is your biggest advantage over big suppliers</li>
+            <li>Ask about their timeline and budget early — qualifies the lead fast</li>
+            <li>If they're not ready to buy, offer to send a brochure — keeps you top of mind</li>
+            <li>Always ask "is there anything else you need to quote?" — upsell opportunity</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BREAKDOWN & REPAIRS -->
+      <div class="page" id="page-repairs">
+        <div class="page-title">Breakdown & Repairs</div>
+        <div class="page-sub">Edit the breakdown and emergency repair section on the site.</div>
+
+        <div class="card">
+          <div class="card-title">Section Heading</div>
+          <div class="form-group">
+            <label>Main Title</label>
+            <input type="text" id="repairs-title" value="Commercial Refrigeration Breakdown & Repairs" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Subheading</label>
+            <input type="text" id="repairs-sub" value="Fast, reliable repairs across the South West and South Wales" oninput="markDirty()">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Feature Points</div>
+          <div class="form-group">
+            <label>Point 1</label>
+            <input type="text" id="repairs-p1" value="Same-day emergency call-outs available" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Point 2</label>
+            <input type="text" id="repairs-p2" value="Commercial refrigeration engineers, not generalists" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Point 3</label>
+            <input type="text" id="repairs-p3" value="All makes and models covered" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Point 4</label>
+            <input type="text" id="repairs-p4" value="Transparent pricing, no hidden call-out fees" oninput="markDirty()">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Coverage Areas</div>
+          <div class="form-group">
+            <label>Area Pills (comma separated)</label>
+            <textarea id="repairs-areas" oninput="markDirty()">Bristol, Bath, Gloucester, Cheltenham, Swindon, Chippenham, Weston-super-Mare, Newport, Cardiff, Forest of Dean, Taunton, Exeter</textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Call Button</div>
+          <div class="form-group">
+            <label>Button Label</label>
+            <input type="text" id="repairs-btn" value="Call Now for Emergency Repairs" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Phone Number (linked)</label>
+            <input type="tel" id="repairs-phone" value="07928 883860" oninput="markDirty()">
+          </div>
+        </div>
+      </div>
+
+      <!-- HOW IT WORKS / PROCESS -->
+      <div class="page" id="page-process">
+        <div class="page-title">How It Works</div>
+        <div class="page-sub">Edit the 4-step process section shown on the site.</div>
+
+        <div class="card">
+          <div class="card-title">Section Heading</div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="process-title" value="How It Works" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Subtitle</label>
+            <input type="text" id="process-sub" value="Simple, straightforward from first call to delivery" oninput="markDirty()">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Step 1</div>
+          <div class="form-group">
+            <label>Icon / Emoji</label>
+            <input type="text" id="step1-icon" value="📞" oninput="markDirty()" style="max-width:80px;">
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="step1-title" value="Get in Touch" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="step1-desc" oninput="markDirty()">Call or email us with your requirements. We'll ask a few quick questions to understand your space, usage and budget.</textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Step 2</div>
+          <div class="form-group">
+            <label>Icon / Emoji</label>
+            <input type="text" id="step2-icon" value="📐" oninput="markDirty()" style="max-width:80px;">
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="step2-title" value="We Recommend" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="step2-desc" oninput="markDirty()">Based on your needs, we'll recommend the right unit. No upselling — just the best fit for your business.</textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Step 3</div>
+          <div class="form-group">
+            <label>Icon / Emoji</label>
+            <input type="text" id="step3-icon" value="📄" oninput="markDirty()" style="max-width:80px;">
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="step3-title" value="You Get a Quote" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="step3-desc" oninput="markDirty()">Clear, itemised quote with no surprises. You'll know exactly what you're getting and what it costs before committing.</textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Step 4</div>
+          <div class="form-group">
+            <label>Icon / Emoji</label>
+            <input type="text" id="step4-icon" value="🚚" oninput="markDirty()" style="max-width:80px;">
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="step4-title" value="Delivered & Installed" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="step4-desc" oninput="markDirty()">Your equipment arrives on time, installed and ready to go. We're on hand for any questions after delivery.</textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO -->
+      <div class="page" id="page-seo">
+        <div class="page-title">SEO Settings</div>
+        <div class="page-sub">Control how your site appears in Google search results.</div>
+
+        <div class="card">
+          <div class="card-title">Page Title & Meta Description</div>
+          <div class="form-group">
+            <label>Page Title <span style="color:#8b949e;font-size:11px;">(shown in Google results and browser tab)</span></label>
+            <input type="text" id="seo-title" value="Commercial Chillers & Refrigerated Display Cabinets | DCR Ltd" oninput="markDirty(); updateCount(this,'seo-title-count',60)">
+            <div class="char-count"><span id="seo-title-count">0</span>/60 chars — aim for under 60</div>
+          </div>
+          <div class="form-group">
+            <label>Meta Description <span style="color:#8b949e;font-size:11px;">(the snippet shown under your link in Google)</span></label>
+            <textarea id="seo-desc" oninput="markDirty(); updateCount(this,'seo-desc-count',160)">DCR Ltd supply and quote commercial chillers, refrigerated display cabinets, cold rooms and ice machines across the South West. Get a free quote today.</textarea>
+            <div class="char-count"><span id="seo-desc-count">0</span>/160 chars — aim for 120-160</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Business Info (Schema / Google)</div>
+          <div class="form-group">
+            <label>Business Name</label>
+            <input type="text" id="seo-bizname" value="DCR Ltd" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Business Type <span style="color:#8b949e;font-size:11px;">(used by Google to categorise you)</span></label>
+            <input type="text" id="seo-biztype" value="LocalBusiness" oninput="markDirty()">
+          </div>
+          <div class="form-group">
+            <label>Keywords <span style="color:#8b949e;font-size:11px;">(comma separated)</span></label>
+            <textarea id="seo-keywords" oninput="markDirty()">commercial chillers, refrigerated display cabinets, commercial refrigeration, cold rooms, ice machines, display fridges, undercounter fridges, prep counters, commercial fridge supplier, DCR Ltd</textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">💡 SEO Tips</div>
+          <ul style="font-size:13px;color:#8b949e;line-height:2;padding-left:18px;">
+            <li>Keep your page title under 60 characters — Google cuts it off after that</li>
+            <li>Meta description should clearly state what you do and where you cover</li>
+            <li>Keywords here reinforce your ranking — include location terms like "Bristol" or "South West"</li>
+            <li>Changes here update the live site instantly when you hit Save & Publish</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div><!-- /layout -->
+</div><!-- /admin-panel -->
+
+<!-- Save Bar -->
+<div class="save-bar" id="saveBar">
+  <span class="save-bar-msg">You have unsaved changes</span>
+  <div style="display:flex;gap:10px;">
+    <button class="btn-sm btn-ghost" onclick="discardChanges()">Discard</button>
+    <button class="btn-sm btn-green" onclick="saveChanges()">🚀 Save & Publish Live</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Config ────────────────────────────────────────────────────────────────────
+const NETLIFY_TOKEN = 'nfp_ooLKkE3Ax7yC3qsuarccWaTGanQjYAToee0f';
+const NETLIFY_SITE_ID = 'd6991bbe-7a5e-4fd0-8ddc-f4e3b73cc8d2';
+
+// ── Auth ─────────────────────────────────────────────────────────────────────
+const CREDS = { user: 'chris', pass: 'DCR2026!' };
+
+function login() {
+  const u = document.getElementById('username').value.trim();
+  const p = document.getElementById('password').value;
+  if (u === CREDS.user && p === CREDS.pass) {
+    sessionStorage.setItem('dcr_auth', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('dcr_auth');
+  location.reload();
+}
+
+// Auto-login if already authenticated this session
+if (sessionStorage.getItem('dcr_auth')) {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-panel').style.display = 'block';
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ── Dirty state ───────────────────────────────────────────────────────────────
+let dirty = false;
+function markDirty() {
+  dirty = true;
+  document.getElementById('saveBar').classList.add('visible');
+}
+function discardChanges() {
+  dirty = false;
+  document.getElementById('saveBar').classList.remove('visible');
+  showToast('Changes discarded');
+}
+async function saveChanges() {
+  const btn = document.querySelector('#saveBar .btn-green');
+  btn.textContent = 'Publishing...';
+  btn.disabled = true;
+
+  try {
+    // Build updated index.html with current field values
+    const res = await fetch('/index.html');
+    let html = await res.text();
+
+    // Apply hero changes
+    const line1 = document.getElementById('hero-line1')?.value;
+    const line2 = document.getElementById('hero-line2')?.value;
+    const sub = document.getElementById('hero-sub')?.value;
+    const phone = document.getElementById('contact-phone')?.value;
+    const email = document.getElementById('contact-email')?.value;
+
+    if (line1 && line2) {
+      html = html.replace(
+        /<h1>.*?<\/h1>/s,
+        `<h1>${line1}<br><span>${line2}</span></h1>`
+      );
+    }
+    if (sub) {
+      html = html.replace(
+        /<p>Top-of-the-range commercial chillers.*?<\/p>/s,
+        `<p>${sub}</p>`
+      );
+    }
+    if (phone) html = html.replace(/07928 883860/g, phone);
+    if (email) html = html.replace(/fridgeman22@googlemail\.com/g, email);
+
+    // Zip files and deploy to Netlify
+    // Use JSZip from CDN
+    if (!window.JSZip) {
+      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
+    }
+
+    const zip = new JSZip();
+    zip.file('index.html', html);
+
+    // Also fetch and include admin.html
+    const adminRes = await fetch('/admin.html');
+    const adminHtml = await adminRes.text();
+    zip.file('admin.html', adminHtml);
+
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+
+    // Deploy to Netlify
+    const deployRes = await fetch(`https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}/deploys`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${NETLIFY_TOKEN}`,
+        'Content-Type': 'application/zip'
+      },
+      body: zipBlob
+    });
+
+    const deploy = await deployRes.json();
+
+    if (deploy.id) {
+      dirty = false;
+      document.getElementById('saveBar').classList.remove('visible');
+      showToast('🚀 Published live! Changes are on commercialchillers.co.uk');
+    } else {
+      throw new Error(deploy.message || 'Deploy failed');
+    }
+  } catch(e) {
+    showToast('❌ Publish failed: ' + e.message);
+    console.error(e);
+  } finally {
+    btn.textContent = 'Save & Publish';
+    btn.disabled = false;
+  }
+}
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── Char counter ──────────────────────────────────────────────────────────────
+function updateCount(el, countId, max) {
+  document.getElementById(countId).textContent = el.value.length;
+}
+
+// ── Products ──────────────────────────────────────────────────────────────────
+function toggleAddProduct() {
+  const f = document.getElementById('addProductForm');
+  f.classList.toggle('visible');
+}
+function saveNewProduct() {
+  const name = document.getElementById('new-product-name').value;
+  if (!name) return;
+  showToast('✅ Category saved — send to RICO to publish');
+  toggleAddProduct();
+  markDirty();
+}
+function editProduct(btn, name) {
+  showToast(`Editing "${name}" — full edit coming soon`);
+}
+
+// Init char count
+document.addEventListener('DOMContentLoaded', () => {
+  const sub = document.getElementById('hero-sub');
+  if (sub) document.getElementById('hero-sub-count').textContent = sub.value.length;
+});
+</script>
+</body>
+</html>

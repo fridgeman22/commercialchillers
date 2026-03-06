@@ -1661,10 +1661,17 @@ function openModal(id) {
         <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1d6fac;margin-bottom:6px;">Precision Refrigeration</div>
         <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px;">${p.name}</h2>
         <p style="font-size:14px;color:#888;margin-bottom:20px;">${p.subtitle}</p>
-        <div style="margin-bottom:20px;">${variantHTML}</div>
+        <div style="margin-bottom:16px;">${variantHTML}</div>
+        ${p.variants.length > 1 ? `
+        <div style="margin-bottom:14px;">
+          <label style="font-size:12px;font-weight:700;color:#555;display:block;margin-bottom:6px;">Select variant:</label>
+          <select id="modal-variant-select" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;color:#0f172a;background:#fff;cursor:pointer;">
+            ${p.variants.map((v,i) => `<option value="${i}">${v.name} — ${v.price}</option>`).join('')}
+          </select>
+        </div>` : `<input type="hidden" id="modal-variant-select" value="0">`}
         <div style="font-size:11px;color:#aaa;margin-bottom:16px;">All prices ex. VAT</div>
         <div style="display:flex;gap:10px;">
-          <button onclick="buyNow('${id}')" style="flex:1;background:#1d6fac;color:#fff;border:none;border-radius:8px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;">Buy Now →</button>
+          <button onclick="buyNow('${id}')" style="flex:1;background:#1d6fac;color:#fff;border:none;border-radius:8px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;">🛒 Add to Basket</button>
           ${p.accessories ? `<button onclick="toggleAccessories()" id="acc-btn" style="flex:1;background:#f0f6ff;color:#1d6fac;border:2px solid #1d6fac;border-radius:8px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;">Accessories ▾</button>` : ''}
         </div>
       </div>
@@ -1714,8 +1721,9 @@ function parsePence(priceStr) {
 function buyNow(id) {
   const p = products[id];
   if (!p) return;
-  // Use first variant by default
-  const variant = p.variants[0];
+  const sel = document.getElementById('modal-variant-select');
+  const idx = sel ? parseInt(sel.value) || 0 : 0;
+  const variant = p.variants[idx] || p.variants[0];
   const existing = basket.find(i => i.id === id && i.variant === variant.name);
   if (existing) {
     existing.qty++;

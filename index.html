@@ -558,6 +558,24 @@
         <div class="price-hint">Click to enquire →</div>
       </div>
     </div>
+    <div class="cat-card" onclick="openModal('hpu152')" style="cursor:pointer;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+        <img src="images/hpu152.jpg" alt="Precision HPU 152 Undercounter 2 Drawer" style="width:100%;height:100%;object-fit:contain;padding:16px;">
+      </div>
+      <div class="cat-body">
+        <h3>Undercounter — 2 Drawer</h3>
+        <p style="margin-bottom:14px;">Precision HPU 152 undercounter 2 drawer fridge. Ideal for kitchens where drawer access is preferred over a hinged door.</p>
+        <div style="border-top:1px solid var(--border);padding-top:12px;margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:600;">HPU 152 — Fridge 1/4°C</span>
+            <span style="font-size:15px;font-weight:700;color:#16a34a;">£2,870</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-light);margin-top:8px;">All prices ex. VAT · Click for full specs</div>
+        </div>
+        <div class="btn-primary" style="width:100%;justify-content:center;font-size:14px;pointer-events:none;">Buy Now →</div>
+      </div>
+    </div>
+
     <div class="cat-card" onclick="openModal('hpu150')" style="cursor:pointer;">
       <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
         <img src="images/hpu150.jpg" alt="Precision HPU 150 Undercounter" style="width:100%;height:100%;object-fit:contain;padding:16px;">
@@ -1042,6 +1060,29 @@ const products = {
       { name: 'Castors (+62mm height)',                                    price: '£134' },
       { name: 'Left hand hinged door',                                     price: 'Included' },
       { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)',  price: '£495' },
+    ]
+  },
+  'hpu152': {
+    name: 'Precision HPU 152',
+    subtitle: 'Undercounter — 2 Drawer',
+    img: 'images/hpu152.jpg',
+    variants: [
+      { name: 'HPU 152 — Fridge 1/4°C', price: '£2,870' },
+    ],
+    specs: [
+      ['Type', 'Undercounter 2 Drawer — 32°C Ambient'],
+      ['Temperature', '1/4°C'],
+      ['Drawers', '2 × solid drawers'],
+      ['Width', '600 mm'],
+      ['Depth', '640 mm'],
+      ['Height', '820 mm'],
+      ['Ventilation', 'Requires rear and top ventilation'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Fridge only — no freezer version. Requires rear and top ventilation.',
+    accessories: [
+      { name: 'Castors (+62mm height)',                                   price: '£134' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495' },
     ]
   },
   'mpu401': {

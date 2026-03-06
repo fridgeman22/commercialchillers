@@ -753,6 +753,24 @@
       </div>
     </div>
 
+    <div class="cat-card" onclick="openModal('bbs900')" style="cursor:pointer;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+        <img src="images/bbs900.jpg" alt="Precision BBS 900 Two Door Bottle Cooler" style="width:100%;height:100%;object-fit:contain;padding:16px;">
+      </div>
+      <div class="cat-body">
+        <h3>Bottle Cooler — Two Door</h3>
+        <p style="margin-bottom:14px;">Precision BBS 900 two door bottle cooler. Glass doors standard. Wide format for busy bars — multiple finish, height and door options available.</p>
+        <div style="border-top:1px solid var(--border);padding-top:12px;margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;font-weight:600;">BBS 900 — Fridge 3/15°C</span>
+            <span style="font-size:15px;font-weight:700;color:#16a34a;">£2,825</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-light);margin-top:8px;">All prices ex. VAT · Click for full specs</div>
+        </div>
+        <div class="btn-primary" style="width:100%;justify-content:center;font-size:14px;pointer-events:none;">Buy Now →</div>
+      </div>
+    </div>
+
     <div class="cat-card" onclick="selectCategory('Display Freezer')">
       <div class="cat-img">🍦</div>
       <div class="cat-body">
@@ -1237,6 +1255,36 @@ const products = {
       { name: 'Castors (+72mm height)',                                   price: '£134' },
       { name: 'Heat resistant worktop (+29mm height, +25mm depth)',       price: '£554' },
       { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495' },
+    ]
+  },
+  'bbs900': {
+    name: 'Precision BBS 900',
+    subtitle: 'Two Door Bottle Cooler',
+    img: 'images/bbs900.jpg',
+    variants: [
+      { name: 'BBS 900 — Fridge 3/15°C', price: '£2,825' },
+    ],
+    specs: [
+      ['Type', 'Two Door Bottle Cooler'],
+      ['Temperature', '3/15°C'],
+      ['Doors', '2 × glass doors (standard)'],
+      ['Width', '900 mm'],
+      ['Depth', '500 mm'],
+      ['Height', '900 mm'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Standard height 900mm. 845mm and 800mm height options available.',
+    accessories: [
+      { name: '845mm height',                                              price: 'Included' },
+      { name: '800mm height',                                              price: '£146'  },
+      { name: 'Solid doors',                                               price: 'Included' },
+      { name: 'Frame door for wood cladding',                              price: '£75'   },
+      { name: 'Bank of glass drawers (900H only)',                         price: '£1,035'},
+      { name: 'Bank of solid drawers (900H only)',                         price: '£935'  },
+      { name: 'Coloured plastisol — door & grille',                        price: '£102'  },
+      { name: 'Painted any RAL — door & grille',                           price: '£601'  },
+      { name: 'Tropicalised 43°C ambient triple glazed (TBBS)',            price: '£562'  },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)',  price: '£495'  },
     ]
   },
   'bbs600': {

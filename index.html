@@ -357,9 +357,60 @@
       footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
       #repairs { padding: 64px 24px !important; }
     }
+  /* ── BASKET ── */
+  #basket-btn { position:fixed; bottom:28px; right:28px; z-index:900; background:#1d6fa4; color:#fff; border:none; border-radius:50px; padding:14px 20px; font-size:15px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:10px; box-shadow:0 4px 20px rgba(0,0,0,0.25); transition:transform .15s; }
+  #basket-btn:hover { transform:scale(1.05); }
+  #basket-count { background:#e53e3e; color:#fff; border-radius:50%; width:22px; height:22px; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  #basket-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:1000; }
+  #basket-drawer { position:fixed; top:0; right:-480px; width:460px; max-width:95vw; height:100vh; background:#fff; z-index:1001; box-shadow:-4px 0 32px rgba(0,0,0,0.15); display:flex; flex-direction:column; transition:right .25s ease; }
+  #basket-drawer.open { right:0; }
+  .basket-head { padding:24px 24px 16px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center; }
+  .basket-head h2 { font-size:18px; font-weight:800; color:#0f172a; }
+  .basket-close { background:none; border:none; font-size:22px; cursor:pointer; color:#64748b; }
+  .basket-items { flex:1; overflow-y:auto; padding:16px 24px; }
+  .basket-empty { text-align:center; color:#94a3b8; padding:60px 0; font-size:15px; }
+  .basket-item { display:flex; gap:12px; padding:14px 0; border-bottom:1px solid #f1f5f9; align-items:flex-start; }
+  .basket-item-info { flex:1; }
+  .basket-item-name { font-size:14px; font-weight:700; color:#0f172a; margin-bottom:2px; }
+  .basket-item-variant { font-size:12px; color:#64748b; margin-bottom:6px; }
+  .basket-item-price { font-size:14px; font-weight:700; color:#16a34a; }
+  .basket-item-qty { display:flex; align-items:center; gap:8px; margin-top:6px; }
+  .qty-btn { background:#f1f5f9; border:none; width:26px; height:26px; border-radius:6px; cursor:pointer; font-size:16px; font-weight:700; color:#0f172a; display:flex; align-items:center; justify-content:center; }
+  .qty-btn:hover { background:#e2e8f0; }
+  .basket-foot { padding:20px 24px; border-top:1px solid #e2e8f0; }
+  .basket-total { display:flex; justify-content:space-between; font-size:16px; font-weight:800; color:#0f172a; margin-bottom:16px; }
+  .basket-total span:last-child { color:#16a34a; }
+  .basket-vat { font-size:12px; color:#94a3b8; margin-bottom:16px; }
+  #checkout-btn { width:100%; background:#1d6fa4; color:#fff; border:none; padding:16px; border-radius:10px; font-size:16px; font-weight:700; cursor:pointer; transition:background .15s; }
+  #checkout-btn:hover { background:#1a5f8f; }
+  #checkout-btn:disabled { background:#94a3b8; cursor:not-allowed; }
   </style>
 </head>
 <body>
+
+<!-- BASKET BUTTON -->
+<button id="basket-btn" onclick="openBasket()" style="display:none;">
+  🛒 Basket <span id="basket-count">0</span>
+</button>
+
+<!-- BASKET OVERLAY -->
+<div id="basket-overlay" onclick="closeBasket()"></div>
+
+<!-- BASKET DRAWER -->
+<div id="basket-drawer">
+  <div class="basket-head">
+    <h2>Your Basket</h2>
+    <button class="basket-close" onclick="closeBasket()">✕</button>
+  </div>
+  <div class="basket-items" id="basket-items">
+    <div class="basket-empty">Your basket is empty</div>
+  </div>
+  <div class="basket-foot">
+    <div class="basket-total"><span>Total</span><span id="basket-total">£0.00</span></div>
+    <div class="basket-vat">All prices ex. VAT</div>
+    <button id="checkout-btn" onclick="goToCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1648,13 +1699,118 @@ function toggleAccessories() {
   if (!open) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
+// ── BASKET ──────────────────────────────────────────────
+let basket = JSON.parse(localStorage.getItem('dcrBasket') || '[]');
+
+function saveBasket() {
+  localStorage.setItem('dcrBasket', JSON.stringify(basket));
+  renderBasket();
+}
+
+function parsePence(priceStr) {
+  return Math.round(parseFloat(priceStr.replace(/[£,]/g, '')) * 100);
+}
+
 function buyNow(id) {
   const p = products[id];
+  if (!p) return;
+  // Use first variant by default
+  const variant = p.variants[0];
+  const existing = basket.find(i => i.id === id && i.variant === variant.name);
+  if (existing) {
+    existing.qty++;
+  } else {
+    basket.push({ id, name: p.name, variant: variant.name, pricePence: parsePence(variant.price), qty: 1 });
+  }
+  saveBasket();
   closeModal();
-  const textarea = document.querySelector('textarea[name="message"]');
-  if (textarea && !textarea.value) textarea.value = `I'd like to purchase / get a quote for: ${p.name} (${p.subtitle})`;
-  document.getElementById('enquire').scrollIntoView({ behavior: 'smooth' });
+  openBasket();
 }
+
+function removeFromBasket(id, variant) {
+  basket = basket.filter(i => !(i.id === id && i.variant === variant));
+  saveBasket();
+}
+
+function changeQty(id, variant, delta) {
+  const item = basket.find(i => i.id === id && i.variant === variant);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) basket = basket.filter(i => !(i.id === id && i.variant === variant));
+  saveBasket();
+}
+
+function renderBasket() {
+  const count = basket.reduce((s, i) => s + i.qty, 0);
+  const total = basket.reduce((s, i) => s + i.pricePence * i.qty, 0);
+  // Button
+  const btn = document.getElementById('basket-btn');
+  btn.style.display = count > 0 ? 'flex' : 'none';
+  document.getElementById('basket-count').textContent = count;
+  // Total
+  document.getElementById('basket-total').textContent = '£' + (total / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 });
+  // Items
+  const el = document.getElementById('basket-items');
+  if (!basket.length) {
+    el.innerHTML = '<div class="basket-empty">Your basket is empty</div>';
+    return;
+  }
+  el.innerHTML = basket.map(item => `
+    <div class="basket-item">
+      <div class="basket-item-info">
+        <div class="basket-item-name">${item.name}</div>
+        <div class="basket-item-variant">${item.variant}</div>
+        <div class="basket-item-price">£${(item.pricePence / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}</div>
+        <div class="basket-item-qty">
+          <button class="qty-btn" onclick="changeQty('${item.id}','${item.variant.replace(/'/g,"\\'")}', -1)">−</button>
+          <span style="font-size:14px;font-weight:700;">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.id}','${item.variant.replace(/'/g,"\\'")}', 1)">+</button>
+          <button class="qty-btn" onclick="removeFromBasket('${item.id}','${item.variant.replace(/'/g,"\\'")}')">🗑</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openBasket() {
+  document.getElementById('basket-drawer').classList.add('open');
+  document.getElementById('basket-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBasket() {
+  document.getElementById('basket-drawer').classList.remove('open');
+  document.getElementById('basket-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+async function goToCheckout() {
+  if (!basket.length) return;
+  const btn = document.getElementById('checkout-btn');
+  btn.disabled = true;
+  btn.textContent = 'Redirecting…';
+  try {
+    const res = await fetch('https://dcr-checkout.vercel.app/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: basket })
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert('Something went wrong. Please call us on 07928 883860.');
+      btn.disabled = false;
+      btn.textContent = 'Proceed to Checkout →';
+    }
+  } catch (e) {
+    alert('Something went wrong. Please call us on 07928 883860.');
+    btn.disabled = false;
+    btn.textContent = 'Proceed to Checkout →';
+  }
+}
+
+// Init basket on load
+renderBasket();
 
 // Click category card → pre-select in form + scroll to it
 function selectCategory(type) {

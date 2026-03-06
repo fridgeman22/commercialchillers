@@ -1646,11 +1646,18 @@ function openModal(id) {
       <td style="padding:8px 0;font-size:13px;color:#333;line-height:1.5;">${v}</td>
     </tr>`).join('');
 
-  const accessoryHTML = p.accessories ? p.accessories.map(a => `
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f5f5f5;">
-      <span style="font-size:13px;color:#333;">${a.name}</span>
-      <span style="font-size:13px;font-weight:700;color:${a.price==='Included'||a.price==='£0'?'#16a34a':'#1d6fac'};white-space:nowrap;margin-left:16px;">${a.price==='£0'?'Included':a.price}</span>
-    </div>`).join('') : '';
+  const accessoryHTML = p.accessories ? p.accessories.map((a, i) => {
+    const isPurchasable = a.price !== 'Included' && a.price !== '£0';
+    const safeId = `acc_${id}_${i}`;
+    return `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f5f5f5;gap:12px;">
+      <div style="display:flex;align-items:center;gap:10px;flex:1;">
+        ${isPurchasable ? `<input type="checkbox" id="${safeId}" data-acc-index="${i}" style="width:16px;height:16px;cursor:pointer;accent-color:#1d6fac;flex-shrink:0;">` : `<span style="width:16px;flex-shrink:0;"></span>`}
+        <label for="${safeId}" style="font-size:13px;color:#333;cursor:${isPurchasable?'pointer':'default'};">${a.name}</label>
+      </div>
+      <span style="font-size:13px;font-weight:700;color:${isPurchasable?'#1d6fac':'#16a34a'};white-space:nowrap;">${a.price === '£0' ? 'Included' : a.price}</span>
+    </div>`;
+  }).join('') : '';
 
   document.getElementById('modal-inner').innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
@@ -1682,9 +1689,9 @@ function openModal(id) {
       ${p.notes ? `<p style="margin-top:12px;font-size:12px;color:#aaa;font-style:italic;">${p.notes}</p>` : ''}
     </div>
     ${p.accessories ? `
-    <div id="acc-panel" style="display:none;margin-top:0;border-top:1px solid #eee;padding-top:24px;">
+    <div id="acc-panel" style="display:block;margin-top:0;border-top:1px solid #eee;padding-top:24px;">
       <h3 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:4px;">Optional Accessories</h3>
-      <p style="font-size:12px;color:#aaa;margin-bottom:12px;">Add to your order — prices ex. VAT</p>
+      <p style="font-size:12px;color:#aaa;margin-bottom:12px;">Tick any accessories to add to basket — prices ex. VAT</p>
       ${accessoryHTML}
     </div>` : ''}
   `;
@@ -1721,6 +1728,8 @@ function parsePence(priceStr) {
 function buyNow(id) {
   const p = products[id];
   if (!p) return;
+
+  // Main product variant
   const sel = document.getElementById('modal-variant-select');
   const idx = sel ? parseInt(sel.value) || 0 : 0;
   const variant = p.variants[idx] || p.variants[0];
@@ -1730,6 +1739,24 @@ function buyNow(id) {
   } else {
     basket.push({ id, name: p.name, variant: variant.name, pricePence: parsePence(variant.price), qty: 1 });
   }
+
+  // Checked accessories
+  if (p.accessories) {
+    document.querySelectorAll('[data-acc-index]:checked').forEach(cb => {
+      const accIdx = parseInt(cb.dataset.accIndex);
+      const acc = p.accessories[accIdx];
+      if (!acc || acc.price === 'Included' || acc.price === '£0') return;
+      const accKey = `${id}_acc_${accIdx}`;
+      const accLabel = `${p.name} — ${acc.name}`;
+      const existingAcc = basket.find(i => i.id === accKey);
+      if (existingAcc) {
+        existingAcc.qty++;
+      } else {
+        basket.push({ id: accKey, name: accLabel, variant: '', pricePence: parsePence(acc.price), qty: 1 });
+      }
+    });
+  }
+
   saveBasket();
   closeModal();
   openBasket();

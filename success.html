@@ -6,29 +6,93 @@
   <title>Order Confirmed | DCR Ltd</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f7f9fc; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
-    .card { background: #fff; border-radius: 16px; padding: 56px 48px; max-width: 520px; width: 100%; text-align: center; box-shadow: 0 4px 32px rgba(0,0,0,0.08); }
-    .icon { font-size: 56px; margin-bottom: 24px; }
-    h1 { font-size: 28px; font-weight: 800; color: #0f172a; margin-bottom: 12px; }
-    p { font-size: 16px; color: #64748b; line-height: 1.6; margin-bottom: 8px; }
-    .contact { margin-top: 32px; padding: 20px; background: #f0f9ff; border-radius: 10px; font-size: 14px; color: #0369a1; }
-    .btn { display: inline-block; margin-top: 32px; background: #1d6fa4; color: #fff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 15px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f7f9fc; min-height: 100vh; padding: 40px 20px; }
+    .wrap { max-width: 640px; margin: 0 auto; }
+    .header { background: #0f172a; border-radius: 12px 12px 0 0; padding: 32px; text-align: center; }
+    .header .tick { font-size: 48px; margin-bottom: 12px; }
+    .header h1 { color: #fff; font-size: 24px; font-weight: 800; margin-bottom: 6px; }
+    .header p { color: rgba(255,255,255,0.6); font-size: 14px; }
+    .card { background: #fff; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 12px 12px; padding: 32px; }
+    .section { margin-bottom: 28px; }
+    .section h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 14px; }
+    .info-row { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+    .info-label { font-size: 13px; color: #64748b; width: 140px; flex-shrink: 0; }
+    .info-val { font-size: 13px; font-weight: 600; color: #0f172a; }
+    .item-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f1f5f9; gap: 12px; }
+    .item-name { font-size: 14px; color: #0f172a; }
+    .item-variant { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+    .item-price { font-size: 14px; font-weight: 700; color: #1d6fa4; white-space: nowrap; }
+    .total-row { display: flex; justify-content: space-between; padding: 16px 0 0; font-size: 18px; font-weight: 800; }
+    .total-row span:last-child { color: #16a34a; }
+    .contact-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 20px; margin-top: 24px; }
+    .contact-box p { font-size: 14px; color: #0369a1; line-height: 1.6; }
+    .btn { display: block; text-align: center; margin-top: 24px; background: #1d6fa4; color: #fff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 15px; }
+    .loading { text-align: center; padding: 60px 0; color: #94a3b8; font-size: 15px; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="icon">✅</div>
-    <h1>Order Confirmed!</h1>
-    <p>Thank you for your order. Payment has been received successfully.</p>
-    <p>We'll be in touch shortly to arrange delivery and installation.</p>
-    <div class="contact">
-      Questions? Call us on <strong>07928 883860</strong> or email <strong>fridgeman22@googlemail.com</strong>
+  <div class="wrap">
+    <div class="header">
+      <div class="tick">✅</div>
+      <h1>Order Confirmed!</h1>
+      <p>Payment received — thank you for your order</p>
     </div>
-    <a href="/" class="btn">Back to DCR Ltd →</a>
+    <div class="card" id="order-card">
+      <div class="loading">Loading your order summary…</div>
+    </div>
   </div>
+
   <script>
-    // Clear basket on successful order
-    localStorage.removeItem('dcrBasket');
+    // Read basket from localStorage (before we clear it)
+    const basket = JSON.parse(localStorage.getItem('dcrBasket') || '[]');
+
+    function fmt(pence) {
+      return '£' + (pence / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 });
+    }
+
+    function render() {
+      const card = document.getElementById('order-card');
+
+      const itemsHTML = basket.length ? basket.map(item => `
+        <div class="item-row">
+          <div>
+            <div class="item-name">${item.name}</div>
+            ${item.variant ? `<div class="item-variant">${item.variant}</div>` : ''}
+          </div>
+          <div style="text-align:right;">
+            <div class="item-price">${fmt(item.pricePence * item.qty)}</div>
+            ${item.qty > 1 ? `<div style="font-size:11px;color:#94a3b8;">${item.qty} × ${fmt(item.pricePence)}</div>` : ''}
+          </div>
+        </div>`).join('') : '<p style="font-size:14px;color:#94a3b8;padding:12px 0;">Order details not available — check your Stripe receipt email.</p>';
+
+      const total = basket.reduce((s, i) => s + i.pricePence * i.qty, 0);
+
+      card.innerHTML = `
+        <div class="section">
+          <h2>What you ordered</h2>
+          ${itemsHTML}
+          ${basket.length ? `<div class="total-row"><span>Total paid</span><span>${fmt(total)}</span></div>
+          <p style="font-size:11px;color:#94a3b8;margin-top:6px;">All prices ex. VAT</p>` : ''}
+        </div>
+
+        <div class="section">
+          <h2>What happens next</h2>
+          <div class="info-row"><span class="info-label">1. Confirmation</span><span class="info-val">Stripe receipt sent to your email</span></div>
+          <div class="info-row"><span class="info-label">2. We'll call you</span><span class="info-val">DCR Ltd will be in touch to confirm delivery details and timescales</span></div>
+          <div class="info-row"><span class="info-label">3. Delivery</span><span class="info-val">We'll arrange delivery and installation to your site</span></div>
+        </div>
+
+        <div class="contact-box">
+          <p><strong>Questions?</strong> Call us on <strong>07928 883860</strong> or email <strong>fridgeman22@googlemail.com</strong></p>
+        </div>
+
+        <a href="/" class="btn">← Back to DCR Ltd</a>`;
+
+      // Clear basket now that we've displayed it
+      localStorage.removeItem('dcrBasket');
+    }
+
+    render();
   </script>
 </body>
 </html>

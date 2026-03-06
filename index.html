@@ -217,7 +217,7 @@
     .cat-card {
       border: 1px solid var(--border); border-radius: 12px;
       overflow: hidden; transition: all 0.25s; cursor: pointer;
-      background: var(--white);
+      background: var(--white); display: flex; flex-direction: column;
     }
     .cat-card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.09); }
     .cat-img {
@@ -227,10 +227,11 @@
       background: var(--off-white);
       border-bottom: 1px solid var(--border);
     }
-    .cat-body { padding: 24px; }
+    .cat-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
     .cat-body h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
     .cat-body p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
     .cat-body .price-hint { font-size: 12px; color: var(--blue); font-weight: 600; margin-top: 12px; }
+    .cat-body .btn-primary { margin-top: auto; }
 
     /* ── WHY ── */
     .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; margin-top: 56px; }

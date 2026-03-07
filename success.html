@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Confirmed | DCR Ltd</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JHX98T9NSJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JHX98T9NSJ');
+  </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f7f9fc; min-height: 100vh; padding: 40px 20px; }
@@ -93,6 +101,25 @@
     }
 
     render();
+
+    // Fire GA4 purchase conversion event
+    if (basket.length) {
+      const total = basket.reduce((s, i) => s + i.pricePence * i.qty, 0);
+      gtag('event', 'purchase', {
+        transaction_id: 'DCR-' + Date.now(),
+        value: total / 100,
+        currency: 'GBP',
+        tax: parseFloat((total / 100 * 0.20).toFixed(2)),
+        items: basket.map((item, i) => ({
+          item_id: item.id,
+          item_name: item.name,
+          item_variant: item.variant || '',
+          price: item.pricePence / 100,
+          quantity: item.qty,
+          index: i,
+        }))
+      });
+    }
   </script>
 </body>
 </html>

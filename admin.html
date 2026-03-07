@@ -207,6 +207,7 @@
       <div class="nav-item" onclick="showPage('seo')"><span class="icon">🔍</span> SEO</div>
       <div class="sidebar-label">Enquiries</div>
       <div class="nav-item" onclick="showPage('enquiries')"><span class="icon">📬</span> Enquiries</div>
+      <div class="nav-item" onclick="showPage('orders')"><span class="icon">💳</span> Orders</div>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -223,8 +224,8 @@
             <div class="l">Site Status</div>
           </div>
           <div class="stat-card">
-            <div class="n">6</div>
-            <div class="l">Product Categories</div>
+            <div class="n">20</div>
+            <div class="l">Products Listed</div>
           </div>
           <div class="stat-card">
             <div class="n" style="color:#1d6fa4;">↑</div>
@@ -314,35 +315,31 @@
           </div>
           <table>
             <tr>
-              <th>Icon</th>
-              <th>Name</th>
+              <th>Model</th>
+              <th>Description</th>
+              <th>From</th>
               <th>Status</th>
-              <th>Action</th>
             </tr>
-            <tr>
-              <td>🧊</td><td>Display Refrigerators</td><td><span class="badge live">Live</span></td>
-              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Display Refrigerators')">Edit</button></td>
-            </tr>
-            <tr>
-              <td>🍽️</td><td>Prep Fridges & Counters</td><td><span class="badge live">Live</span></td>
-              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Prep Fridges & Counters')">Edit</button></td>
-            </tr>
-            <tr>
-              <td>📦</td><td>Undercounter Units</td><td><span class="badge live">Live</span></td>
-              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Undercounter Units')">Edit</button></td>
-            </tr>
-            <tr>
-              <td>🏭</td><td>Cold Rooms & Ice Machines</td><td><span class="badge live">Live</span></td>
-              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Cold Rooms & Ice Machines')">Edit</button></td>
-            </tr>
-            <tr>
-              <td>🍦</td><td>Display Freezers</td><td><span class="badge live">Live</span></td>
-              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Display Freezers')">Edit</button></td>
-            </tr>
-            <tr>
-              <td>🍺</td><td>Back Bar & Bottle Coolers</td><td><span class="badge live">Live</span></td>
-              <td><button class="btn-sm btn-ghost" onclick="editProduct(this,'Back Bar & Bottle Coolers')">Edit</button></td>
-            </tr>
+            <tr><td>MPT 601</td><td>Single Door Upright — Fridge/Freezer</td><td>£3,120</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>MPT 1401</td><td>Double Door Upright — Fridge/Freezer</td><td>£4,700</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>MPU 401</td><td>Slimline Bottom Mount — Fridge/Freezer</td><td>£3,080</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>MCU 211</td><td>GN Prep Counter 2 Door — Fridge/Freezer</td><td>£4,170</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>MCU 311</td><td>GN Prep Counter 3 Door — Fridge/Freezer</td><td>£4,845</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>MCU 411</td><td>GN Prep Counter 4 Door — Fridge</td><td>£5,590</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>HPU 150</td><td>Undercounter Single Door — Fridge/Freezer</td><td>£1,830</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>HPU 152</td><td>Undercounter 2 Drawer — Fridge</td><td>£2,755</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>HPU 153</td><td>Undercounter 3 Drawer — Fridge</td><td>£3,125</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>VUBC 121</td><td>Variable Temp Drawer — Single</td><td>£3,365</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>VUBC 121-2</td><td>Variable Temp Drawer — Double Stack</td><td>£6,310</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>HSS 340 PREP</td><td>Space Saving Prep Counter — Fridge</td><td>£4,890</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>PPC 307</td><td>Refrigerated Prep Counter 3 Door — Fridge</td><td>£8,060</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>PPC 410</td><td>Refrigerated Prep Counter 4 Door — Fridge</td><td>£8,555</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>PPS 209</td><td>Pizza Prep Station 2 Door — Fridge</td><td>£9,640</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>PCF 52</td><td>Blast Chiller / Freezer Cabinet</td><td>£11,645</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>BBS 600</td><td>Single Door Bottle Cooler</td><td>£1,805</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td>BBS 900</td><td>Two Door Bottle Cooler</td><td>£2,710</td><td><span class="badge live">Live</span></td></tr>
+            <tr><td style="color:#8b949e;">Cold Rooms</td><td style="color:#8b949e;">Bespoke cold room solutions</td><td style="color:#8b949e;">POA</td><td><span class="badge" style="background:#21262d;color:#8b949e;">Hidden</span></td></tr>
+            <tr><td style="color:#8b949e;">Display Freezers</td><td style="color:#8b949e;">Blast chillers, display freezers</td><td style="color:#8b949e;">POA</td><td><span class="badge" style="background:#21262d;color:#8b949e;">Hidden</span></td></tr>
           </table>
 
           <div class="add-product-form" id="addProductForm">
@@ -434,6 +431,45 @@
             <label>Description</label>
             <textarea id="why3-desc" oninput="markDirty()">Tell us what you need, we handle the quote and sourcing. No chasing multiple suppliers. One point of contact, straightforward process.</textarea>
           </div>
+        </div>
+      </div>
+
+      
+      <!-- ORDERS -->
+      <div class="page" id="page-orders">
+        <div class="page-title">Orders</div>
+        <div class="page-sub">Recent orders placed through the website via Stripe.</div>
+
+        <div class="card">
+          <div class="card-title">💳 View Orders in Stripe</div>
+          <p style="font-size:13px;color:#8b949e;line-height:1.7;margin-bottom:16px;">
+            All payments are processed and stored securely by Stripe. Click below to view your full order history, issue refunds, or download receipts.
+          </p>
+          <a href="https://dashboard.stripe.com/payments" target="_blank" style="display:inline-block;background:#1d6fa4;color:#fff;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;">Open Stripe Dashboard ↗</a>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📧 Order Emails</div>
+          <p style="font-size:13px;color:#8b949e;line-height:1.7;">
+            Every order triggers an automatic email to <strong style="color:#e6edf3;">fridgeman22@googlemail.com</strong> with:<br><br>
+            • Customer name, email and phone<br>
+            • Delivery address<br>
+            • Full itemised order (products + accessories)<br>
+            • Total charged (ex. VAT)<br><br>
+            Forward this to your supplier to arrange dispatch.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">💡 Checkout Setup</div>
+          <p style="font-size:13px;color:#8b949e;line-height:1.7;">
+            <strong style="color:#e6edf3;">Payment processor:</strong> Stripe (live mode)<br>
+            <strong style="color:#e6edf3;">VAT:</strong> 20% added at checkout automatically<br>
+            <strong style="color:#e6edf3;">Checkout URL:</strong> dcr-checkout.vercel.app/api/checkout<br>
+            <strong style="color:#e6edf3;">Success page:</strong> commercialchillers.co.uk/success.html<br>
+            <strong style="color:#e6edf3;">Reseller discount:</strong> 40% off Precision RRP (private)<br>
+            <strong style="color:#e6edf3;">Site prices:</strong> 4% below RRP (competitive, undisclosed)
+          </p>
         </div>
       </div>
 

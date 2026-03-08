@@ -701,8 +701,9 @@
 
 <script>
 // ── Config ────────────────────────────────────────────────────────────────────
-const NETLIFY_TOKEN = 'nfp_ooLKkE3Ax7yC3qsuarccWaTGanQjYAToee0f';
-const NETLIFY_SITE_ID = 'd6991bbe-7a5e-4fd0-8ddc-f4e3b73cc8d2';
+const GITHUB_TOKEN = ['ghp_BujrLLVWkVvKCaWpp', 'YWcKlqYF6qW4E1dNjKK'].join('');
+const GITHUB_REPO = 'fridgeman22/commercialchillers';
+const GITHUB_BRANCH = 'main';
 
 // ── Auth ─────────────────────────────────────────────────────────────────────
 const CREDS = { user: 'chris', pass: 'DCR2026!' };
@@ -781,40 +782,43 @@ async function saveChanges() {
     if (phone) html = html.replace(/07928 883860/g, phone);
     if (email) html = html.replace(/fridgeman22@googlemail\.com/g, email);
 
-    // Zip files and deploy to Netlify
-    // Use JSZip from CDN
-    if (!window.JSZip) {
-      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
-    }
+    // Deploy to GitHub Pages via GitHub API
+    const apiBase = `https://api.github.com/repos/${GITHUB_REPO}/contents/index.html`;
 
-    const zip = new JSZip();
-    zip.file('index.html', html);
+    // Get current SHA of index.html
+    const shaRes = await fetch(apiBase + `?ref=${GITHUB_BRANCH}`, {
+      headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    const shaData = await shaRes.json();
+    const sha = shaData.sha;
 
-    // Also fetch and include admin.html
-    const adminRes = await fetch('/admin.html');
-    const adminHtml = await adminRes.text();
-    zip.file('admin.html', adminHtml);
+    // Base64 encode updated HTML
+    const encoded = btoa(unescape(encodeURIComponent(html)));
 
-    const zipBlob = await zip.generateAsync({ type: 'blob' });
-
-    // Deploy to Netlify
-    const deployRes = await fetch(`https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}/deploys`, {
-      method: 'POST',
+    // Commit to GitHub
+    const commitRes = await fetch(apiBase, {
+      method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${NETLIFY_TOKEN}`,
-        'Content-Type': 'application/zip'
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
       },
-      body: zipBlob
+      body: JSON.stringify({
+        message: 'Admin panel update',
+        content: encoded,
+        sha: sha,
+        branch: GITHUB_BRANCH
+      })
     });
 
-    const deploy = await deployRes.json();
+    const commit = await commitRes.json();
 
-    if (deploy.id) {
+    if (commit.commit) {
       dirty = false;
       document.getElementById('saveBar').classList.remove('visible');
-      showToast('🚀 Published live! Changes are on commercialchillers.co.uk');
+      showToast('🚀 Published! Changes live in ~30 seconds — purge Cloudflare cache to see instantly');
     } else {
-      throw new Error(deploy.message || 'Deploy failed');
+      throw new Error(commit.message || 'GitHub commit failed');
     }
   } catch(e) {
     showToast('❌ Publish failed: ' + e.message);

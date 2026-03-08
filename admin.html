@@ -756,9 +756,9 @@ async function saveChanges() {
   btn.disabled = true;
 
   try {
-    // Build updated index.html with current field values
-    const res = await fetch('/index.html');
-    let html = await res.text();
+    // Fetch current index.html direct from GitHub (bypasses Cloudflare cache)
+    const rawRes = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/index.html?t=${Date.now()}`);
+    let html = await rawRes.text();
 
     // Apply hero changes
     const line1 = document.getElementById('hero-line1')?.value;

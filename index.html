@@ -1087,31 +1087,46 @@
 </footer>
 
 <script>
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
+  const btn = form.querySelector('.form-submit');
   const data = new FormData(form);
   const obj = Object.fromEntries(data);
 
-  // Build mailto link as fallback
-  const subject = encodeURIComponent(`Refrigeration Enquiry — ${obj.business || obj.name}`);
-  const body = encodeURIComponent(
-    `New enquiry from ${obj.name}\n` +
-    `Business: ${obj.business}\n` +
-    `Type: ${obj.business_type}\n` +
-    `Phone: ${obj.phone}\n` +
-    `Email: ${obj.email}\n` +
-    `Equipment: ${obj.equipment_type}\n\n` +
-    `Message:\n${obj.message}`
-  );
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
 
-  // Show success
-  document.getElementById('successMsg').style.display = 'block';
-  form.querySelector('.form-submit').textContent = '✓ Enquiry Sent';
-  form.querySelector('.form-submit').style.background = '#059669';
+  try {
+    const res = await fetch('https://dcr-checkout.vercel.app/api/enquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(obj)
+    });
 
-  // Open mailto as delivery mechanism
-  window.location.href = `mailto:fridgeman22@googlemail.com?subject=${subject}&body=${body}`;
+    if (res.ok) {
+      document.getElementById('successMsg').style.display = 'block';
+      btn.textContent = '✓ Enquiry Sent';
+      btn.style.background = '#059669';
+      form.reset();
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (err) {
+    // Fallback to mailto if API fails
+    const subject = encodeURIComponent(`Refrigeration Enquiry — ${obj.business || obj.name}`);
+    const body = encodeURIComponent(
+      `New enquiry from ${obj.name}\n` +
+      `Business: ${obj.business}\n` +
+      `Phone: ${obj.phone}\n` +
+      `Email: ${obj.email}\n` +
+      `Equipment: ${obj.equipment_type}\n\n` +
+      `Message:\n${obj.message}`
+    );
+    window.location.href = `mailto:fridgeman22@googlemail.com?subject=${subject}&body=${body}`;
+    btn.textContent = 'Send Enquiry';
+    btn.disabled = false;
+  }
 }
 
 // ── PRODUCT MODAL ──────────────────────────────────────────

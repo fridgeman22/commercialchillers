@@ -341,7 +341,19 @@
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
+    
+      /* PARTNER LOGOS */
+      .partner-title { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:18px; text-align:left; }
+      .partner-logos { display:flex; align-items:center; gap:30px; flex-wrap:wrap; justify-content:flex-start; }
+      .partner-divider { width:1px; height:40px; background:rgba(255,255,255,0.15); }
+      
+      @media (max-width: 900px) {
+        .partner-title { text-align: center; }
+        .partner-logos { gap: 16px; justify-content: center; }
+        .partner-divider { display: none; }
+      }
+
+      @media (max-width: 900px) {
       nav { padding: 0 16px; }
       .logo-sub { display: none; }
       nav > div > a { display: none; }
@@ -459,32 +471,32 @@
 
     <!-- Partner logos strip -->
     <div style="margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.1);">
-      <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:18px;">Authorised Resellers &amp; Partners</div>
-      <div style="display:flex;align-items:center;gap:40px;flex-wrap:wrap;">
+      <div class="partner-title">Authorised Resellers &amp; Partners</div>
+      <div class="partner-logos">
         <!-- Precision Refrigeration -->
           <img src="images/precision-logo.jpg" alt="Precision Refrigeration" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
         <!-- Divider -->
-        <div style="width:1px;height:40px;background:rgba(255,255,255,0.15);"></div>
+        <div class="partner-divider"></div>
         <!-- JaM Refrigeration -->
         <img src="images/jam-logo.jpg" alt="JaM Refrigeration" style="height:44px;width:auto;mix-blend-mode:screen;opacity:0.9;">
           <!-- Divider -->
-          <div style="width:1px;height:40px;background:rgba(255,255,255,0.15);"></div>
+          <div class="partner-divider"></div>
           <!-- Cold Control -->
           <img src="images/cold-control-logo.jpg" alt="Cold Control" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
           <!-- Divider -->
-          <div style="width:1px;height:40px;background:rgba(255,255,255,0.15);"></div>
+          <div class="partner-divider"></div>
           <!-- CB Refrigeration -->
           <img src="images/cb-refrigeration-logo.jpg" alt="CB Refrigeration" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
           <!-- Divider -->
-          <div style="width:1px;height:40px;background:rgba(255,255,255,0.15);"></div>
+          <div class="partner-divider"></div>
           <!-- Pentland Wholesale -->
           <img src="images/pentland-logo.jpg" alt="Pentland Wholesale" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
           <!-- Divider -->
-          <div style="width:1px;height:40px;background:rgba(255,255,255,0.15);"></div>
+          <div class="partner-divider"></div>
           <!-- Tailor Made -->
           <img src="images/tailormade-logo.jpg" alt="Tailor Made" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
           <!-- Divider -->
-          <div style="width:1px;height:40px;background:rgba(255,255,255,0.15);"></div>
+          <div class="partner-divider"></div>
           <!-- Flowrite -->
           <img src="images/flowrite-logo.jpg" alt="Flowrite" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
         </div>

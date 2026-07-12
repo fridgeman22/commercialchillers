@@ -45,9 +45,31 @@
         
         /* Nav logo style for login */
         .admin-logo { display: inline-block; font-size: 18px; font-weight: 800; letter-spacing: 3px; color: var(--navy); border: 2px solid var(--navy); padding: 5px 10px; line-height: 1; margin-bottom: 24px; }
+
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --navy: #e2e8f0;
+            --blue: #38bdf8;
+            --cyan: #0284c7;
+            --white: #1e293b;
+            --off-white: #0f172a;
+            --border: #334155;
+            --text-dark: #f8fafc;
+            --text-mid: #94a3b8;
+        }
+        [data-theme="dark"] body { background: #020617; }
+        [data-theme="dark"] .status-badge { background: #064e3b; color: #34d399; border-color: #065f46; }
+        [data-theme="dark"] tr:hover td { background-color: #334155; }
+        [data-theme="dark"] input { background: #0f172a; color: #f8fafc; }
+        [data-theme="dark"] #loginError { background: #7f1d1d; color: #fca5a5; }
+        [data-theme="dark"] .admin-logo { color: #f8fafc; border-color: #f8fafc; }
+        
+        .theme-toggle { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; padding: 8px; border-radius: 50%; transition: background 0.2s; }
+        .theme-toggle:hover { background: rgba(128,128,128,0.1); }
     </style>
 </head>
 <body>
+    <button class="theme-toggle" onclick="toggleAdminTheme()" id="adminThemeBtn" aria-label="Toggle Dark Mode">🌙</button>
 
     <!-- LOGIN SCREEN -->
     <div id="loginSection">
@@ -82,6 +104,23 @@
     </div>
 
     <script>
+        // Theme Logic
+        function initAdminTheme() {
+            const currentTheme = localStorage.getItem('dcrAdminTheme');
+            if (currentTheme) {
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                document.getElementById('adminThemeBtn').textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+        function toggleAdminTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const target = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', target);
+            localStorage.setItem('dcrAdminTheme', target);
+            document.getElementById('adminThemeBtn').textContent = target === 'dark' ? '☀️' : '🌙';
+        }
+        initAdminTheme();
+        
         // Check if already authenticated in session
         const savedPass = sessionStorage.getItem('adminPass');
         if (savedPass) {

@@ -378,7 +378,7 @@
   #basket-btn:hover { transform:scale(1.05); }
   #basket-count { background:#e53e3e; color:#fff; border-radius:50%; width:22px; height:22px; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; }
   #basket-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:1000; }
-  #basket-drawer { position:fixed; top:0; right:-480px; width:460px; max-width:95vw; height:100vh; background:#fff; z-index:1001; box-shadow:-4px 0 32px rgba(0,0,0,0.15); display:flex; flex-direction:column; transition:right .25s ease; }
+  #basket-drawer { position:fixed; top:0; right:-480px; width:460px; max-width:95vw; height:100vh; background:var(--white); z-index:1001; box-shadow:-4px 0 32px rgba(0,0,0,0.15); display:flex; flex-direction:column; transition:right .25s ease; }
   #basket-drawer.open { right:0; }
   .basket-head { padding:24px 24px 16px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center; }
   .basket-head h2 { font-size:18px; font-weight:800; color:#0f172a; }
@@ -400,7 +400,36 @@
   #checkout-btn { width:100%; background:#1d6fa4; color:#fff; border:none; padding:16px; border-radius:10px; font-size:16px; font-weight:700; cursor:pointer; transition:background .15s; }
   #checkout-btn:hover { background:#1a5f8f; }
   #checkout-btn:disabled { background:#94a3b8; cursor:not-allowed; }
-  </style>
+  
+      /* DARK MODE */
+      [data-theme="dark"] {
+        --navy: #09101a;
+        --navy-mid: #101c2b;
+        --navy-light: #16263b;
+        --white: #111827; 
+        --off-white: #030712; 
+        --text: #f1f5f9;
+        --text-mid: #94a3b8;
+        --text-light: #64748b;
+        --border: #1f2937;
+        --ice: #1f2937;
+      }
+      [data-theme="dark"] body { background: var(--off-white); color: var(--text); }
+      [data-theme="dark"] .cat-body h3 { color: var(--text); }
+      [data-theme="dark"] .cat-img { background: #1f2937 !important; }
+      [data-theme="dark"] .modal-bg { background: var(--white) !important; color: var(--text); }
+      [data-theme="dark"] #basket-drawer { background: var(--white); color: var(--text); }
+      [data-theme="dark"] .basket-head h2 { color: var(--text); }
+      [data-theme="dark"] .basket-item-name, [data-theme="dark"] .basket-total { color: var(--text); }
+      [data-theme="dark"] .qty-btn { color: var(--text); background: var(--border); }
+      [data-theme="dark"] .qty-btn:hover { background: var(--navy-light); }
+      [data-theme="dark"] .btn-primary { background: var(--blue); color: #fff; }
+      [data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea { background: var(--white) !important; color: var(--text) !important; border-color: var(--border) !important; }
+      [data-theme="dark"] .sec-title, [data-theme="dark"] .why-card h3 { color: var(--text); }
+      [data-theme="dark"] .cat-card { background: var(--white); }
+      [data-theme="dark"] .partner-logos img { filter: brightness(0.9); }
+
+    </style>
 </head>
 <body>
 
@@ -436,7 +465,8 @@
   </a>
   <span class="logo-sub" style="position:absolute;left:50%;transform:translateX(-50%);font-size:13px;font-weight:600;letter-spacing:0.5px;color:var(--text-mid);">Nationwide Delivery &amp; Install</span>
   <div style="display:flex;gap:20px;align-items:center;">
-    <a href="#repairs" style="color:var(--text-mid);text-decoration:none;font-size:14px;font-weight:500;">Breakdown & Repairs</a>
+    <button id="theme-btn" onclick="toggleTheme()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-mid);padding:4px;display:flex;align-items:center;" aria-label="Toggle Dark Mode">🌙</button>
+      <a href="#repairs" style="color:var(--text-mid);text-decoration:none;font-size:14px;font-weight:500;">Breakdown & Repairs</a>
     <a href="#enquire" class="nav-cta">Get a Quote →</a>
   </div>
 </nav>
@@ -474,7 +504,7 @@
       <div class="partner-title">Authorised Resellers &amp; Partners</div>
       <div class="partner-logos">
         <!-- Precision Refrigeration -->
-          <img src="images/precision-logo.jpg" alt="Precision Refrigeration" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
+          <img src="images/precision-logo.jpg" alt="Precision Refrigeration" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:var(--white);padding:4px;">
         <!-- Divider -->
         <div class="partner-divider"></div>
         <!-- JaM Refrigeration -->
@@ -482,23 +512,23 @@
           <!-- Divider -->
           <div class="partner-divider"></div>
           <!-- Cold Control -->
-          <img src="images/cold-control-logo.jpg" alt="Cold Control" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
+          <img src="images/cold-control-logo.jpg" alt="Cold Control" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:var(--white);padding:4px;">
           <!-- Divider -->
           <div class="partner-divider"></div>
           <!-- CB Refrigeration -->
-          <img src="images/cb-refrigeration-logo.jpg" alt="CB Refrigeration" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
+          <img src="images/cb-refrigeration-logo.jpg" alt="CB Refrigeration" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:var(--white);padding:4px;">
           <!-- Divider -->
           <div class="partner-divider"></div>
           <!-- Pentland Wholesale -->
-          <img src="images/pentland-logo.jpg" alt="Pentland Wholesale" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
+          <img src="images/pentland-logo.jpg" alt="Pentland Wholesale" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:var(--white);padding:4px;">
           <!-- Divider -->
           <div class="partner-divider"></div>
           <!-- Tailor Made -->
-          <img src="images/tailormade-logo.jpg" alt="Tailor Made" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
+          <img src="images/tailormade-logo.jpg" alt="Tailor Made" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:var(--white);padding:4px;">
           <!-- Divider -->
           <div class="partner-divider"></div>
           <!-- Flowrite -->
-          <img src="images/flowrite-logo.jpg" alt="Flowrite" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:#fff;padding:4px;">
+          <img src="images/flowrite-logo.jpg" alt="Flowrite" style="height:44px;width:140px;object-fit:contain;border-radius:4px;background:var(--white);padding:4px;">
         </div>
       </div>
 
@@ -527,7 +557,7 @@
 
   <div class="cat-grid">
     <div class="cat-card" onclick="openModal('mpt601')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/mpt601.jpg" alt="Precision MPT 601 Upright Cabinet" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -548,7 +578,7 @@
       </div>
     </div>
     <div class="cat-card" onclick="openModal('mpt1401')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/mpt1401.jpg" alt="Precision MPT 1401 Double Door Upright" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -569,7 +599,7 @@
       </div>
     </div>
     <div class="cat-card" onclick="openModal('mpu401')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/mpu401.jpg" alt="Precision MPU 401 Bottom Mount" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -591,7 +621,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('mcu211')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/mcu211.jpg" alt="Precision MCU 211 Gastronorm Counter" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -612,7 +642,7 @@
       </div>
     </div>
     <div class="cat-card" onclick="openModal('mcu311')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/mcu311.jpg" alt="Precision MCU 311 Gastronorm Counter 3 Door" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -634,7 +664,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('mcu411')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/mcu411.jpg" alt="Precision MCU 411 Gastronorm Counter 4 Door" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -653,7 +683,7 @@
 
 
     <div class="cat-card" onclick="openModal('hpu153')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/hpu153.jpg" alt="Precision HPU 153 Undercounter 3 Drawer" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -671,7 +701,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('hpu152')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/hpu152.jpg" alt="Precision HPU 152 Undercounter 2 Drawer" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -689,7 +719,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('hpu150')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/hpu150.jpg" alt="Precision HPU 150 Undercounter" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -711,7 +741,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('vubc121')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/vubc121.jpg" alt="Precision VUBC 121 Variable Temperature Drawer" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -729,7 +759,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('vubc1212')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/vubc121-2.jpg" alt="Precision VUBC 121-2 Double Stack" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -747,7 +777,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('hss340prep')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/hss340prep.jpg" alt="Precision HSS 340 PREP Space Saving Prep Counter" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -765,7 +795,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('ppc307')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/ppc307.jpg" alt="Precision PPC 307 Refrigerated Prep Counter" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -783,7 +813,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('ppc410')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/ppc410.jpg" alt="Precision PPC 410 Refrigerated Prep Counter 4 Door" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -801,7 +831,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('pps209')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/pps209.jpg" alt="Precision PPS 209 Pizza Prep Station" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -819,7 +849,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('pcf52')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/pcf52.jpg" alt="Precision PCF 52 Blast Chiller Freezer" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -837,7 +867,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('bbs600')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/bbs600.jpg" alt="Precision BBS 600 Bottle Cooler" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -855,7 +885,7 @@
     </div>
 
     <div class="cat-card" onclick="openModal('bbs900')" style="cursor:pointer;">
-      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
         <img src="images/bbs900.jpg" alt="Precision BBS 900 Two Door Bottle Cooler" style="width:100%;height:100%;object-fit:contain;padding:16px;">
       </div>
       <div class="cat-body">
@@ -879,7 +909,7 @@
 
 
 <!-- ICE MACHINES (PLACEHOLDER) -->
-<section id="ice-machines" class="sec" style="background:#fff;">
+<section id="ice-machines" class="sec" style="background:var(--white);">
   <div class="sec-center">
     <div class="sec-title">Ice Machines</div>
     <p class="sec-sub">Commercial ice makers for pubs, restaurants, and hotels. Coming soon.</p>
@@ -888,7 +918,7 @@
       
       <!-- Placeholder Ice Machine 1 -->
       <div class="cat-card" onclick="openModal('ice1')">
-        <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+        <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
           <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:14px;font-weight:600;">Image Coming Soon</div>
         </div>
         <div class="cat-body">
@@ -907,7 +937,7 @@
 
       <!-- Placeholder Ice Machine 2 -->
       <div class="cat-card" onclick="openModal('ice2')">
-        <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:#f7f9fc;">
+        <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
           <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:14px;font-weight:600;">Image Coming Soon</div>
         </div>
         <div class="cat-body">
@@ -1746,13 +1776,13 @@ function openModal(id) {
   if (!p) return;
   const variantHTML = p.variants.map(v => `
     <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;">
-      <span style="font-size:14px;font-weight:600;color:#222;">${v.name}</span>
+      <span style="font-size:14px;font-weight:600;color:var(--text);">${v.name}</span>
       <span style="font-size:16px;font-weight:700;color:#1d6fac;">${v.price}</span>
     </div>`).join('');
   const specHTML = p.specs.map(([k,v]) => `
     <tr>
-      <td style="padding:8px 12px 8px 0;font-size:13px;font-weight:600;color:#555;white-space:nowrap;vertical-align:top;">${k}</td>
-      <td style="padding:8px 0;font-size:13px;color:#333;line-height:1.5;">${v}</td>
+      <td style="padding:8px 12px 8px 0;font-size:13px;font-weight:600;color:var(--text-mid);white-space:nowrap;vertical-align:top;">${k}</td>
+      <td style="padding:8px 0;font-size:13px;color:var(--text);line-height:1.5;">${v}</td>
     </tr>`).join('');
 
   const accessoryHTML = p.accessories ? p.accessories.map((a, i) => {
@@ -1762,7 +1792,7 @@ function openModal(id) {
     <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f5f5f5;gap:12px;">
       <div style="display:flex;align-items:center;gap:10px;flex:1;">
         ${isPurchasable ? `<input type="checkbox" id="${safeId}" data-acc-index="${i}" style="width:16px;height:16px;cursor:pointer;accent-color:#1d6fac;flex-shrink:0;">` : `<span style="width:16px;flex-shrink:0;"></span>`}
-        <label for="${safeId}" style="font-size:13px;color:#333;cursor:${isPurchasable?'pointer':'default'};">${a.name}</label>
+        <label for="${safeId}" style="font-size:13px;color:var(--text);cursor:${isPurchasable?'pointer':'default'};">${a.name}</label>
       </div>
       <span style="font-size:13px;font-weight:700;color:${isPurchasable?'#1d6fac':'#16a34a'};white-space:nowrap;">${a.price === '£0' ? 'Included' : a.price}</span>
     </div>`;
@@ -1771,17 +1801,17 @@ function openModal(id) {
   document.getElementById('modal-inner').innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
       <div>
-        <img src="${p.img}" alt="${p.name}" style="width:100%;border-radius:10px;background:#f7f9fc;padding:16px;object-fit:contain;max-height:340px;">
+        <img src="${p.img}" alt="${p.name}" style="width:100%;border-radius:10px;background:var(--off-white);padding:16px;object-fit:contain;max-height:340px;">
       </div>
       <div>
         <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1d6fac;margin-bottom:6px;">Precision Refrigeration</div>
         <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px;">${p.name}</h2>
-        <p style="font-size:14px;color:#888;margin-bottom:20px;">${p.subtitle}</p>
+        <p style="font-size:14px;color:var(--text-light);margin-bottom:20px;">${p.subtitle}</p>
         <div style="margin-bottom:16px;">${variantHTML}</div>
         ${p.variants.length > 1 ? `
         <div style="margin-bottom:14px;">
-          <label style="font-size:12px;font-weight:700;color:#555;display:block;margin-bottom:6px;">Select variant:</label>
-          <select id="modal-variant-select" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;color:#0f172a;background:#fff;cursor:pointer;">
+          <label style="font-size:12px;font-weight:700;color:var(--text-mid);display:block;margin-bottom:6px;">Select variant:</label>
+          <select id="modal-variant-select" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;color:#0f172a;background:var(--white);cursor:pointer;">
             ${p.variants.map((v,i) => `<option value="${i}">${v.name} — ${v.price}</option>`).join('')}
           </select>
         </div>` : `<input type="hidden" id="modal-variant-select" value="0">`}
@@ -1792,14 +1822,14 @@ function openModal(id) {
         </div>
       </div>
     </div>
-    <div style="margin-top:28px;border-top:1px solid #eee;padding-top:24px;">
-      <h3 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:12px;">Specifications</h3>
+    <div style="margin-top:28px;border-top:1px solid var(--border);padding-top:24px;">
+      <h3 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:12px;">Specifications</h3>
       <table style="width:100%;border-collapse:collapse;">${specHTML}</table>
       ${p.notes ? `<p style="margin-top:12px;font-size:12px;color:#aaa;font-style:italic;">${p.notes}</p>` : ''}
     </div>
     ${p.accessories ? `
-    <div id="acc-panel" style="display:block;margin-top:0;border-top:1px solid #eee;padding-top:24px;">
-      <h3 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:4px;">Optional Accessories</h3>
+    <div id="acc-panel" style="display:block;margin-top:0;border-top:1px solid var(--border);padding-top:24px;">
+      <h3 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:4px;">Optional Accessories</h3>
       <p style="font-size:12px;color:#aaa;margin-bottom:12px;">Tick any accessories to add to basket — prices ex. VAT</p>
       ${accessoryHTML}
     </div>` : ''}
@@ -1823,6 +1853,26 @@ function toggleAccessories() {
 }
 
 // ── BASKET ──────────────────────────────────────────────
+
+// 🌗 THEME TOGGLE 🌗
+function initTheme() {
+  const currentTheme = localStorage.getItem('dcrTheme');
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    const btn = document.getElementById('theme-btn');
+    if(btn) btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  }
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const target = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', target);
+  localStorage.setItem('dcrTheme', target);
+  const btn = document.getElementById('theme-btn');
+  if(btn) btn.textContent = target === 'dark' ? '☀️' : '🌙';
+}
+initTheme();
+
 let basket = JSON.parse(localStorage.getItem('dcrBasket') || '[]');
 
 function saveBasket() {
@@ -1978,7 +2028,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 <!-- PRODUCT MODAL -->
 <div id="product-modal" onclick="if(event.target===this)closeModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#fff;border-radius:16px;max-width:860px;width:100%;max-height:90vh;overflow-y:auto;position:relative;padding:32px;">
+  <div class="modal-bg" style="background:var(--white);border-radius:16px;max-width:860px;width:100%;max-height:90vh;overflow-y:auto;position:relative;padding:32px;">
     <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:#f0f0f0;border:none;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;line-height:36px;text-align:center;">✕</button>
     <div id="modal-inner"></div>
   </div>

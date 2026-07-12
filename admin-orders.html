@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chillers - Secure Order Panel</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0f172a;
+            --blue: #1d6fa4;
+            --cyan: #7ec8e3;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-mid: #64748b;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--off-white); margin: 0; padding: 40px 20px; color: var(--text-dark); }
+        .container { max-width: 1200px; margin: 0 auto; background: var(--white); border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); padding: 30px 40px; border: 1px solid var(--border); }
+        h1 { color: var(--navy); font-weight: 800; letter-spacing: -0.5px; border-bottom: 2px solid var(--border); padding-bottom: 16px; margin-top: 0; }
+        
+        table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 24px; }
+        th, td { text-align: left; padding: 16px; border-bottom: 1px solid var(--border); }
+        th { background-color: var(--off-white); color: var(--text-mid); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+        th:first-child { border-top-left-radius: 8px; }
+        th:last-child { border-top-right-radius: 8px; }
+        tr:hover td { background-color: #fcfcfd; }
+        td { font-size: 14px; }
+        
+        .status-badge { background: #dcfce7; color: #166534; padding: 6px 10px; border-radius: 6px; font-size: 13px; font-weight: 700; display: inline-block; border: 1px solid #bbf7d0; }
+        .shipping-box { background: var(--off-white); padding: 12px; border-radius: 6px; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--text-mid); white-space: pre-wrap; border: 1px solid var(--border); line-height: 1.5; }
+        .shipping-box b { color: var(--navy); font-size: 14px; }
+        
+        .btn { display: inline-flex; align-items: center; justify-content: center; background: var(--blue); color: var(--white); padding: 10px 20px; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+        .btn:hover { background: #1a5f8f; }
+        .btn:active { transform: scale(0.98); }
+        
+        /* Login Styles */
+        #loginSection { max-width: 420px; margin: 80px auto; text-align: center; padding: 40px; background: var(--white); border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+        #loginSection h2 { font-weight: 800; font-size: 24px; color: var(--navy); margin-top: 0; margin-bottom: 8px; letter-spacing: -0.5px; }
+        #adminPass { padding: 14px 16px; width: 100%; box-sizing: border-box; margin-bottom: 20px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; font-family: 'Inter', sans-serif; transition: border-color 0.2s; outline: none; }
+        #adminPass:focus { border-color: var(--blue); }
+        #loginError { color: #dc2626; display: none; margin-top: 12px; font-size: 13px; font-weight: 600; background: #fee2e2; padding: 10px; border-radius: 6px; }
+        
+        /* Nav logo style for login */
+        .admin-logo { display: inline-block; font-size: 18px; font-weight: 800; letter-spacing: 3px; color: var(--navy); border: 2px solid var(--navy); padding: 5px 10px; line-height: 1; margin-bottom: 24px; }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="loginSection">
+        <div class="admin-logo">DCR LTD</div>
+        <h2 style="margin-top: 0;">Admin Access</h2>
+        <p style="color: var(--text-mid); font-size: 14px; margin-bottom: 24px; line-height: 1.5;">Please enter the master password to view the secure order panel.</p>
+        <input type="password" id="adminPass" placeholder="Password..." onkeypress="if(event.key === 'Enter') login()">
+        <button onclick="login()" class="btn" style="width: 100%;">Unlock Dashboard</button>
+        <p id="loginError">Incorrect password or server error.</p>
+    </div>
+
+    <!-- DASHBOARD (Hidden initially) -->
+    <div class="container" id="dashboardSection" style="display:none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 16px; margin-bottom: 24px;">
+            <h1 style="border: none; padding: 0; margin: 0;">📦 Order Panel</h1>
+            <button onclick="logout()" class="btn" style="background: #ef4444; color: white;">Lock Panel</button>
+        </div>
+        <div id="loading" style="margin-top: 20px;">Loading orders from Stripe...</div>
+        <table id="ordersTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Item</th>
+                    <th>Amount</th>
+                    <th>Shipping Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="ordersBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        // Check if already authenticated in session
+        const savedPass = sessionStorage.getItem('adminPass');
+        if (savedPass) {
+            fetchOrders(savedPass);
+        }
+
+        function login() {
+            const pass = document.getElementById('adminPass').value;
+            if (!pass) return;
+            document.getElementById('loginError').style.display = 'none';
+            fetchOrders(pass);
+        }
+
+        function logout() {
+            sessionStorage.removeItem('adminPass');
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('adminPass').value = '';
+            document.getElementById('ordersBody').innerHTML = '';
+        }
+
+        function fetchOrders(password) {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('ordersTable').style.display = 'none';
+            document.getElementById('ordersBody').innerHTML = '';
+
+            fetch('/api/orders', {
+                headers: {
+                    'Authorization': 'Bearer ' + password
+                }
+            })
+            .then(res => {
+                if (res.status === 401) throw new Error('Unauthorized');
+                return res.json();
+            })
+            .then(data => {
+                // Save pass for session so refresh works
+                sessionStorage.setItem('adminPass', password);
+                
+                document.getElementById('loading').style.display = 'none';
+                const table = document.getElementById('ordersTable');
+                const tbody = document.getElementById('ordersBody');
+                
+                if (data.success && data.orders.length > 0) {
+                    table.style.display = 'table';
+                    data.orders.forEach(order => {
+                        const tr = document.createElement('tr');
+                        
+                        let shippingHtml = '<span style="color:#9ca3af;">No shipping collected</span>';
+                        if (order.shipping && order.shipping.address) {
+                            const addr = order.shipping.address;
+                            shippingHtml = `<div class="shipping-box">` + 
+                                `<b>${order.shipping.name || order.customer_name}</b>\n` +
+                                `${addr.line1 || ''}\n` +
+                                (addr.line2 ? `${addr.line2}\n` : '') +
+                                `${addr.city || ''}, ${addr.postal_code || ''}\n` +
+                                (order.shipping.phone ? `📞 ${order.shipping.phone}` : '') +
+                                `</div>`;
+                        }
+
+                        tr.innerHTML = `
+                            <td>${order.created}</td>
+                            <td><b>${order.customer_name}</b><br><span style="color:#6b7280;font-size:0.875rem;">${order.customer_email}</span></td>
+                            <td>${order.description}</td>
+                            <td><span class="status-badge">${order.currency} ${order.amount}</span></td>
+                            <td>${shippingHtml}</td>
+                            <td><a href="${order.receipt_url}" target="_blank" class="btn">View Receipt</a></td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    document.getElementById('loading').style.display = 'block';
+                    document.getElementById('loading').innerText = 'No recent successful orders found.';
+                }
+            })
+            .catch(err => {
+                sessionStorage.removeItem('adminPass');
+                document.getElementById('dashboardSection').style.display = 'none';
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('loginError').style.display = 'block';
+                if(err.message !== 'Unauthorized') {
+                    console.error(err);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

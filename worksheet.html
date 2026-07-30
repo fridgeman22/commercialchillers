@@ -216,23 +216,28 @@
       <textarea style="min-height: 60px;"></textarea>
     </div>
 
-    <div class="section-title">Equipment Details</div>
-    <div class="grid-2">
-      <div class="field">
-        <label>Make & Model</label>
-        <input type="text">
-      </div>
-      <div class="field">
-        <label>Serial Number</label>
-        <input type="text">
-      </div>
-      <div class="field">
-        <label>Refrigerant Type</label>
-        <input type="text">
-      </div>
-      <div class="field">
-        <label>Charge / Quantity</label>
-        <input type="text">
+    <div class="section-title" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>Equipment Details</span>
+      <button type="button" class="clear-btn" onclick="addEquipment()">+ Add Equipment</button>
+    </div>
+    <div id="equipment-list">
+      <div class="grid-2 equip-block" style="position:relative; margin-bottom:15px; padding-bottom:15px; border-bottom:1px dashed #cbd5e1;">
+        <div class="field">
+          <label>Make & Model</label>
+          <input type="text">
+        </div>
+        <div class="field">
+          <label>Serial Number</label>
+          <input type="text">
+        </div>
+        <div class="field">
+          <label>Refrigerant Type</label>
+          <input type="text">
+        </div>
+        <div class="field">
+          <label>Charge / Quantity</label>
+          <input type="text">
+        </div>
       </div>
     </div>
 
@@ -363,6 +368,34 @@
       const canvas = document.getElementById(id);
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    
+    function addEquipment() {
+      const list = document.getElementById('equipment-list');
+      const block = document.createElement('div');
+      block.className = 'grid-2 equip-block';
+      block.style.cssText = 'position:relative; margin-bottom:15px; padding-bottom:15px; border-bottom:1px dashed #cbd5e1;';
+      block.innerHTML = `
+        <button type="button" class="clear-btn" style="position:absolute; top:0; right:-40px; color:#ef4444;" onclick="this.parentElement.remove()">X</button>
+        <div class="field">
+          <label>Make & Model</label>
+          <input type="text">
+        </div>
+        <div class="field">
+          <label>Serial Number</label>
+          <input type="text">
+        </div>
+        <div class="field">
+          <label>Refrigerant Type</label>
+          <input type="text">
+        </div>
+        <div class="field">
+          <label>Charge / Quantity</label>
+          <input type="text">
+        </div>
+      `;
+      list.appendChild(block);
     }
 
     window.addEventListener('load', () => {

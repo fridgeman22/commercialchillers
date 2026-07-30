@@ -308,17 +308,21 @@
     <div class="section-title">Signatures</div>
     <div class="grid-2" style="margin-top: 20px;">
       <div class="field">
+        <label>Engineer Name (Print)</label>
+        <input type="text" value="Chris" style="margin-bottom: 15px;">
         <label>Engineer Signature</label>
         <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #f8fafc; position: relative;">
           <canvas id="eng-sig" width="350" height="100" style="width: 100%; display: block; cursor: crosshair; touch-action: none;"></canvas>
-          <button type="button" class="clear-btn" onclick="clearCanvas('eng-sig')" style="position: absolute; top: 5px; right: 5px;">Clear</button>
+          <button type="button" class="clear-btn hide-print" onclick="clearCanvas('eng-sig')" style="position: absolute; top: 5px; right: 5px;">Clear</button>
         </div>
       </div>
       <div class="field">
+        <label>Customer Name (Print)</label>
+        <input type="text" style="margin-bottom: 15px;">
         <label>Customer Signature</label>
         <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #f8fafc; position: relative;">
           <canvas id="cust-sig" width="350" height="100" style="width: 100%; display: block; cursor: crosshair; touch-action: none;"></canvas>
-          <button type="button" class="clear-btn" onclick="clearCanvas('cust-sig')" style="position: absolute; top: 5px; right: 5px;">Clear</button>
+          <button type="button" class="clear-btn hide-print" onclick="clearCanvas('cust-sig')" style="position: absolute; top: 5px; right: 5px;">Clear</button>
         </div>
       </div>
     </div>

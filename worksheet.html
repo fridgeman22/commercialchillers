@@ -156,6 +156,16 @@
         border: 1px solid #e2e8f0;
       }
     }
+  
+    .clear-btn {
+      background: #e2e8f0; border: none; border-radius: 4px; font-size: 11px; padding: 4px 8px; cursor: pointer; color: #475569; font-weight: bold;
+    }
+    .clear-btn:hover { background: #cbd5e1; }
+    @media print {
+      .clear-btn { display: none; }
+      canvas { border: none !important; border-bottom: 1px dotted #94a3b8 !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -258,15 +268,22 @@
       </div>
     </div>
 
+    
     <div class="section-title">Signatures</div>
-    <div class="grid-2" style="margin-top: 30px;">
+    <div class="grid-2" style="margin-top: 20px;">
       <div class="field">
         <label>Engineer Signature</label>
-        <div style="border-bottom: 1px solid #cbd5e1; height: 40px; margin-top: 10px;"></div>
+        <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #f8fafc; position: relative;">
+          <canvas id="eng-sig" width="350" height="100" style="width: 100%; display: block; cursor: crosshair; touch-action: none;"></canvas>
+          <button type="button" class="clear-btn" onclick="clearCanvas('eng-sig')" style="position: absolute; top: 5px; right: 5px;">Clear</button>
+        </div>
       </div>
       <div class="field">
         <label>Customer Signature</label>
-        <div style="border-bottom: 1px solid #cbd5e1; height: 40px; margin-top: 10px;"></div>
+        <div style="border: 1px solid #cbd5e1; border-radius: 4px; background: #f8fafc; position: relative;">
+          <canvas id="cust-sig" width="350" height="100" style="width: 100%; display: block; cursor: crosshair; touch-action: none;"></canvas>
+          <button type="button" class="clear-btn" onclick="clearCanvas('cust-sig')" style="position: absolute; top: 5px; right: 5px;">Clear</button>
+        </div>
       </div>
     </div>
 
@@ -274,5 +291,80 @@
       <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
     </div>
   </div>
+
+  <script>
+    function setupCanvas(id) {
+      const canvas = document.getElementById(id);
+      const ctx = canvas.getContext('2d');
+      let isDrawing = false;
+      let lastX = 0;
+      let lastY = 0;
+
+      // Make lines smooth and dark blue
+      ctx.strokeStyle = '#1d6fa4';
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        // Handle both touch and mouse
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        // Scale for canvas internal resolution vs CSS size
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        return {
+          x: (clientX - rect.left) * scaleX,
+          y: (clientY - rect.top) * scaleY
+        };
+      }
+
+      function startDrawing(e) {
+        if(e.type === 'touchstart') e.preventDefault();
+        isDrawing = true;
+        const pos = getPos(e);
+        lastX = pos.x;
+        lastY = pos.y;
+      }
+
+      function draw(e) {
+        if (!isDrawing) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        lastX = pos.x;
+        lastY = pos.y;
+      }
+
+      function stopDrawing() {
+        isDrawing = false;
+      }
+
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mouseout', stopDrawing);
+      
+      canvas.addEventListener('touchstart', startDrawing, {passive: false});
+      canvas.addEventListener('touchmove', draw, {passive: false});
+      canvas.addEventListener('touchend', stopDrawing);
+    }
+
+    function clearCanvas(id) {
+      const canvas = document.getElementById(id);
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    window.addEventListener('load', () => {
+      setupCanvas('eng-sig');
+      setupCanvas('cust-sig');
+    });
+  </script>
 </body>
+
 </html>

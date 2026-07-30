@@ -228,6 +228,7 @@
     </div>
     <div id="equipment-list">
       <div class="grid-2 equip-block" style="position:relative; margin-bottom:15px; padding-bottom:15px; border-bottom:1px dashed #cbd5e1;">
+        <button type="button" class="clear-btn hide-print" style="position:absolute; top:0; right:-40px; color:#ef4444;" onclick="this.parentElement.remove()">X</button>
         <div class="field">
           <label>Make & Model</label>
           <input type="text">
@@ -271,9 +272,24 @@
         </tr>
       </thead>
       <tbody id="parts-list">
-        <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td class="hide-print" style="border:none;"></td></tr>
-        <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td class="hide-print" style="border:none;"></td></tr>
-        <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td class="hide-print" style="border:none;"></td></tr>
+        <tr>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td class="hide-print" style="border:none; text-align:center; vertical-align:middle;"><button type="button" class="clear-btn" style="color:#ef4444;" onclick="this.parentElement.parentElement.remove()">X</button></td>
+        </tr>
+        <tr>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td class="hide-print" style="border:none; text-align:center; vertical-align:middle;"><button type="button" class="clear-btn" style="color:#ef4444;" onclick="this.parentElement.parentElement.remove()">X</button></td>
+        </tr>
+        <tr>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td class="hide-print" style="border:none; text-align:center; vertical-align:middle;"><button type="button" class="clear-btn" style="color:#ef4444;" onclick="this.parentElement.parentElement.remove()">X</button></td>
+        </tr>
       </tbody>
     </table>
 
@@ -402,7 +418,7 @@
       block.className = 'grid-2 equip-block';
       block.style.cssText = 'position:relative; margin-bottom:15px; padding-bottom:15px; border-bottom:1px dashed #cbd5e1;';
       block.innerHTML = `
-        <button type="button" class="clear-btn" style="position:absolute; top:0; right:-40px; color:#ef4444;" onclick="this.parentElement.remove()">X</button>
+        <button type="button" class="clear-btn hide-print" style="position:absolute; top:0; right:-40px; color:#ef4444;" onclick="this.parentElement.remove()">X</button>
         <div class="field">
           <label>Make & Model</label>
           <input type="text">

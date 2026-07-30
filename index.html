@@ -35,7 +35,7 @@
     "description": "DCR Ltd — the UK's cheapest authorised Precision Refrigeration reseller. Upright cabinets from £2,413, prep counters from £4,414, blast chillers from £8,676, all ex VAT. Engineer-backed advice and free UK delivery.",
     "url": "https://www.commercialchillers.co.uk",
     "telephone": "+447928883860",
-    "email": "fridgeman22@googlemail.com",
+    "email": "service@commercialchillers.co.uk",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "GB"
@@ -482,7 +482,7 @@
     <p>Top-of-the-range commercial chillers and refrigerated display cabinets supplied and quoted by DCR Ltd. Display fridges, undercounter units, prep counters, ice machines and cold rooms. Tailored to your exact requirements.</p>
     <div class="hero-ctas">
       <a href="#enquire" class="btn-primary">Get a Free Quote →</a>
-      <a href="mailto:fridgeman22@googlemail.com" class="btn-secondary">✉️ Email Us</a>
+      <a href="mailto:service@commercialchillers.co.uk" class="btn-secondary">✉️ Email Us</a>
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
@@ -1099,7 +1099,7 @@
     <span class="contact-icon">✉️</span>
     <div>
       <div class="contact-label">Email Enquiries</div>
-      <a href="mailto:fridgeman22@googlemail.com" class="contact-val">fridgeman22@googlemail.com</a>
+      <a href="mailto:service@commercialchillers.co.uk" class="contact-val">service@commercialchillers.co.uk</a>
     </div>
   </div>
   <div style="width:1px;height:48px;background:var(--border);"></div>
@@ -1201,7 +1201,7 @@
   </div>
   <div class="foot-links">
     <a href="#enquire">Get a Quote</a>
-    <a href="mailto:fridgeman22@googlemail.com">Email</a>
+    <a href="mailto:service@commercialchillers.co.uk">Email</a>
       <a href="https://commercialchillers.vercel.app/admin" style="color: #4b5563;">Admin Login</a>
   </div>
   <div class="foot-copy">© 2026 DCR Ltd · All rights reserved </div>
@@ -1244,7 +1244,7 @@ async function handleSubmit(e) {
       `Equipment: ${obj.equipment_type}\n\n` +
       `Message:\n${obj.message}`
     );
-    window.location.href = `mailto:fridgeman22@googlemail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:service@commercialchillers.co.uk?subject=${subject}&body=${body}`;
     btn.textContent = 'Send Enquiry';
     btn.disabled = false;
   }
@@ -2076,12 +2076,12 @@ async function goToCheckout() {
     if (data.url) {
       window.location.href = data.url;
     } else {
-      alert('Something went wrong. Please email us at fridgeman22@googlemail.com.');
+      alert('Something went wrong. Please email us at service@commercialchillers.co.uk.');
       btn.disabled = false;
       btn.textContent = 'Proceed to Checkout →';
     }
   } catch (e) {
-    alert('Something went wrong. Please email us at fridgeman22@googlemail.com.');
+    alert('Something went wrong. Please email us at service@commercialchillers.co.uk.');
     btn.disabled = false;
     btn.textContent = 'Proceed to Checkout →';
   }

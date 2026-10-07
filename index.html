@@ -84,7 +84,7 @@
     body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
     /* ── NAV ── */
-    nav { margin-top: 46px;
+    nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(255,255,255,0.96);
       backdrop-filter: blur(12px);
@@ -433,11 +433,6 @@
 </head>
 <body>
 
-<!-- EMERGENCY BANNER -->
-<div style="background: #e53e3e; color: #fff; text-align: center; padding: 12px 20px; font-weight: 700; font-size: 15px; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-  🚨 Commercial Fridge Down? Fast Response Repairs in Gloucestershire & Forest of Dean — Call Chris: <a href="tel:07928883860" style="color: #fff; text-decoration: underline; font-weight: 800;">07928883860</a>
-</div>
-
 <!-- BASKET BUTTON -->
 <button id="basket-btn" onclick="openBasket()" style="display:none;">
   🛒 Basket <span id="basket-count">0</span>
@@ -471,7 +466,7 @@
   <span class="logo-sub" style="position:absolute;left:50%;transform:translateX(-50%);font-size:13px;font-weight:600;letter-spacing:0.5px;color:var(--text-mid);">Nationwide Delivery &amp; Install</span>
   <div style="display:flex;gap:20px;align-items:center;">
     <button id="theme-btn" onclick="toggleTheme()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-mid);padding:4px;display:flex;align-items:center;" aria-label="Toggle Dark Mode">🌙</button>
-      <a href="tel:07928883860" style="color:#e53e3e;text-decoration:none;font-size:15px;font-weight:700;">🚨 07928883860</a>
+      <a href="#repairs" style="color:var(--text-mid);text-decoration:none;font-size:14px;font-weight:500;">Breakdown & Repairs</a>
     <a href="#enquire" class="nav-cta">Get a Quote →</a>
   </div>
 </nav>
@@ -483,11 +478,11 @@
       <span class="badge-dot"></span>
       Commercial Chillers &amp; Refrigerated Display Cabinets
     </div>
-    <h1>Commercial Refrigeration<br><span>Breakdown Repairs & Sales</span></h1>
-    <p>Fast-response engineering for commercial chillers, cold rooms, and display fridges across Gloucestershire & the Wye Valley. Plus, premium new equipment supplied and installed by DCR Ltd.</p>
+    <h1>Commercial Chillers<br><span>& Refrigerated Display Cabinets</span></h1>
+    <p>Top-of-the-range commercial chillers and refrigerated display cabinets supplied and quoted by DCR Ltd. Display fridges, undercounter units, prep counters, ice machines and cold rooms. Tailored to your exact requirements.</p>
     <div class="hero-ctas">
-      <a href="tel:07928883860" class="btn-primary" style="background: #e53e3e; box-shadow: 0 8px 24px rgba(229,62,62,0.4); border: 2px solid #e53e3e;">🚨 Emergency Breakdown Call</a>
-      <a href="#enquire" class="btn-secondary">Get a Sales Quote →</a>
+      <a href="#enquire" class="btn-primary">Get a Free Quote →</a>
+      <a href="mailto:service@commercialchillers.co.uk" class="btn-secondary">✉️ Email Us</a>
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
@@ -881,3 +876,1246 @@
         <div style="border-top:1px solid var(--border);padding-top:12px;margin-bottom:14px;">
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:13px;font-weight:600;">BBS 600 — Fridge 3/15°C</span>
+            <span style="font-size:15px;font-weight:700;color:#16a34a;">£1,416</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-light);margin-top:8px;">All prices ex. VAT · Click for full specs</div>
+        </div>
+        <div class="btn-primary" style="width:100%;justify-content:center;font-size:14px;pointer-events:none;">Buy Now →</div>
+      </div>
+    </div>
+
+    <div class="cat-card" onclick="openModal('bbs900')" style="cursor:pointer;">
+      <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
+        <img src="images/bbs900.jpg" alt="Precision BBS 900 Two Door Bottle Cooler" style="width:100%;height:100%;object-fit:contain;padding:16px;">
+      </div>
+      <div class="cat-body">
+        <h3>Bottle Cooler — Two Door</h3>
+        <p style="margin-bottom:14px;">Precision BBS 900 two door bottle cooler. Glass doors standard. Wide format for busy bars — multiple finish, height and door options available.</p>
+        <div style="border-top:1px solid var(--border);padding-top:12px;margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;font-weight:600;">BBS 900 — Fridge 3/15°C</span>
+            <span style="font-size:15px;font-weight:700;color:#16a34a;">£2,131</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-light);margin-top:8px;">All prices ex. VAT · Click for full specs</div>
+        </div>
+        <div class="btn-primary" style="width:100%;justify-content:center;font-size:14px;pointer-events:none;">Buy Now →</div>
+      </div>
+    </div>
+
+</div>
+</div>
+  </div>
+</section>
+
+
+<!-- ICE MACHINES (PLACEHOLDER) -->
+<section id="ice-machines" class="sec" style="background:var(--white);">
+  <div class="sec-center">
+    <div class="sec-title">Commercial Ice Machines</div>
+    <p class="sec-sub">High-performance Blizzard ice makers and flakers. Designed for busy pubs, restaurants, and fish displays. Free delivery.</p>
+    
+    <div class="cat-grid">
+      
+      <!-- BIM40 -->
+      <div class="cat-card" onclick="openModal('bim40')">
+        <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
+          <img src="images/bim40.jpg" alt="Blizzard BIM40 Ice Maker" style="width:100%;height:100%;object-fit:contain;padding:16px;">
+        </div>
+        <div class="cat-body">
+          <h3>Integral Ice Maker (40kg)</h3>
+          <p style="margin-bottom:14px;">Blizzard BIM40 undercounter ice maker. Produces up to 40kg of cubed ice per day with 15kg insulated storage bin.</p>
+          <div style="border-top:1px solid var(--border);padding-top:12px;margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:13px;font-weight:600;">BIM40 - Air Cooled</span>
+              <span style="font-size:15px;font-weight:700;color:#16a34a;">£778</span>
+            </div>
+            <div style="font-size:11px;color:var(--text-light);margin-top:8px;">All prices ex. VAT • Click for full specs</div>
+          </div>
+          <div class="btn-primary" style="width:100%;justify-content:center;font-size:14px;pointer-events:none;">Buy Now ➔</div>
+        </div>
+      </div>
+
+      <!-- BIM160 -->
+      <div class="cat-card" onclick="openModal('bim160')">
+        <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
+          <img src="images/bim160.jpg" alt="Blizzard BIM160 Ice Maker" style="width:100%;height:100%;object-fit:contain;padding:16px;">
+        </div>
+        <div class="cat-body">
+          <h3>Modular Ice Maker (159kg)</h3>
+          <p style="margin-bottom:14px;">Blizzard BIM160 high-capacity modular ice maker with 125kg storage bin. Perfect for high volume venues.</p>
+          <div style="border-top:1px solid var(--border);padding-top:12px;margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:13px;font-weight:600;">BIM160 - Air Cooled</span>
+              <span style="font-size:15px;font-weight:700;color:#16a34a;">£2,298</span>
+            </div>
+            <div style="font-size:11px;color:var(--text-light);margin-top:8px;">All prices ex. VAT • Click for full specs</div>
+          </div>
+          <div class="btn-primary" style="width:100%;justify-content:center;font-size:14px;pointer-events:none;">Buy Now ➔</div>
+        </div>
+      </div>
+
+      <!-- BIM230 -->
+      <div class="cat-card" onclick="openModal('bim230')">
+        <div class="cat-img" style="height:260px;overflow:hidden;padding:0;background:var(--off-white);">
+          <img src="images/bim230.jpg" alt="Blizzard BIM230 Ice Maker" style="width:100%;height:100%;object-fit:contain;padding:16px;">
+        </div>
+        <div class="cat-body">
+          <h3>High Capacity Ice Maker (227kg)</h3>
+          <p style="margin-bottom:14px;">Blizzard BIM230 high-capacity modular ice maker with 175kg storage bin. Ideal for large venues.</p>
+          <div style="border-top:1px solid var(--border);padding-top:12px;margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:13px;font-weight:600;">BIM230 - Air Cooled</span>
+              <span style="font-size:15px;font-weight:700;color:#16a34a;">£2,742</span>
+            </div>
+            <div style="font-size:11px;color:var(--text-light);margin-top:8px;">All prices ex. VAT • Click for full specs</div>
+          </div>
+          <div class="btn-primary" style="width:100%;justify-content:center;font-size:14px;pointer-events:none;">Buy Now ➔</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY DCR -->
+<section class="sec sec-center" style="background:var(--off-white); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="eyebrow">Why Choose DCR Ltd</div>
+  <div class="sec-title">The right equipment,<br>at the right price</div>
+  <p class="sec-sub">We're refrigeration engineers first — and the UK's cheapest authorised resellers of Precision Refrigeration. We know exactly what performs in commercial kitchens, and we won't sell you what you don't need. Best price guaranteed.</p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🔧</div>
+      <h3>Engineers, Not Salespeople</h3>
+      <p>DCR Ltd are commercial refrigeration specialists. Our advice comes from years of hands-on engineering experience — not a commission target.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⭐</div>
+      <h3>Premium Equipment Only</h3>
+      <p>We supply top-of-the-range commercial refrigeration units built for demanding environments. Quality that lasts, from brands you can trust.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📋</div>
+      <h3>No-Hassle Procurement</h3>
+      <p>Tell us what you need, we handle the quote and sourcing. No chasing multiple suppliers. One point of contact, straightforward process.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BREAKDOWN & REPAIRS -->
+<section id="repairs" style="background:var(--navy);padding:96px 64px;text-align:center;">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="eyebrow" style="color:#7ec8e3;">Breakdown & Repairs</div>
+    <div class="sec-title" style="color:#fff;">Refrigeration breakdown?<br>We cover the <span style="color:#7ec8e3;">South West</span></div>
+    <p class="sec-sub" style="margin:0 auto 48px;color:rgba(255,255,255,0.65);">DCR Ltd provides commercial refrigeration breakdown and repair services across the South West of England. Whether it's a display fridge, prep counter, cold room or ice machine. We get you back up and running fast.</p>
+
+    <!-- 4 feature pills -->
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:48px;text-align:left;">
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px 22px;display:flex;align-items:flex-start;gap:14px;">
+        <div style="font-size:22px;flex-shrink:0;">⚡</div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Fast Response</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.55);">Rapid callout across Bristol, Bath, Gloucester, Cheltenham, Swindon and surrounding areas</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px 22px;display:flex;align-items:flex-start;gap:14px;">
+        <div style="font-size:22px;flex-shrink:0;">🔧</div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">All Commercial Equipment</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.55);">Display fridges, undercounter units, prep counters, cold rooms, ice machines and more</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px 22px;display:flex;align-items:flex-start;gap:14px;">
+        <div style="font-size:22px;flex-shrink:0;">🏢</div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">All Venues</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.55);">Restaurants, pubs, hotels, cafes, convenience stores and catering operations</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px 22px;display:flex;align-items:flex-start;gap:14px;">
+        <div style="font-size:22px;flex-shrink:0;">📋</div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;">Servicing Contracts Available</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.55);">Planned preventative maintenance to keep your equipment running all year round</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Areas -->
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:48px;">
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Bristol</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Bath</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Gloucester</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Cheltenham</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Swindon</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Chippenham</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Weston-super-Mare</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Newport</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Cardiff</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Forest of Dean</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Taunton</span>
+      <span style="background:rgba(29,111,164,0.15);border:1px solid rgba(29,111,164,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.8);">Exeter</span>
+    </div>
+
+    <a href="#enquire" class="btn-primary" style="display:inline-flex;">✉️ Request Breakdown Service</a>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="eyebrow">How It Works</div>
+    <div class="sec-title">From enquiry to delivery<br>in four simple steps</div>
+    <p class="sec-sub">We keep it simple. Fill in the form, we get back to you with a quote — no obligation, no hard sell.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <h3>Tell Us What You Need</h3>
+        <p>Fill in the enquiry form with your requirements — type of unit, quantity, and your contact details.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <h3>We Review &amp; Quote</h3>
+        <p>DCR Ltd reviews your requirements and comes back with a tailored quote for the right equipment.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <h3>You Approve</h3>
+        <p>Happy with the quote? We handle the order. No hidden costs, no surprises.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <h3>Delivered</h3>
+        <p>Your equipment is delivered to site. Simple, straightforward, sorted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <div class="contact-item">
+    <span class="contact-icon">✉️</span>
+    <div>
+      <div class="contact-label">Email Enquiries</div>
+      <a href="mailto:service@commercialchillers.co.uk" class="contact-val">service@commercialchillers.co.uk</a>
+    </div>
+  </div>
+  <div style="width:1px;height:48px;background:var(--border);"></div>
+  <div class="contact-item">
+    <span class="contact-icon">🕐</span>
+    <div>
+      <div class="contact-label">Response Time</div>
+      <span class="contact-val" style="cursor:default;">Same Day</span>
+    </div>
+  </div>
+</div>
+
+<!-- FORM -->
+<section class="form-section" id="enquire">
+  <div style="text-align:center;max-width:680px;margin:0 auto;">
+    <div class="eyebrow">Free Quote</div>
+    <div class="sec-title">Tell us what you're looking for</div>
+    <p class="sec-sub" style="margin:0 auto;">No obligation. We'll come back to you with the right equipment at the right price.</p>
+  </div>
+
+  <div class="form-wrap">
+    <div class="form-header">
+      <div class="form-header-icon">🧊</div>
+      <div>
+        <h3>Refrigeration Enquiry</h3>
+        <p>Fill in your details and we'll get back to you same day</p>
+      </div>
+    </div>
+    <div class="form-body">
+      <form id="enquiryForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" name="name" placeholder="John Smith" required>
+          </div>
+          <div class="form-group">
+            <label>Business Name *</label>
+            <input type="text" name="business" placeholder="The Crown Pub" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" name="phone" placeholder="Your phone number" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" name="email" placeholder="john@example.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Type of Business</label>
+          <select name="business_type">
+            <option value="">Select your business type...</option>
+            <option>Restaurant</option>
+            <option>Café / Coffee Shop</option>
+            <option>Pub / Bar</option>
+            <option>Hotel</option>
+            <option>Convenience Store / Off Licence</option>
+            <option>Supermarket / Retail</option>
+            <option>Catering Company</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Equipment Required</label>
+          <select name="equipment_type">
+            <option value="">Select equipment type...</option>
+            <option>Display Refrigerator / Upright Fridge</option>
+            <option>Undercounter Fridge</option>
+            <option>Prep Fridge / Saladette</option>
+            <option>Back Bar / Bottle Cooler</option>
+            <option>Display Freezer</option>
+            <option>Undercounter Freezer</option>
+            <option>Cold Room / Ice Machine</option>
+            <option>Multiple Items</option>
+            <option>Not Sure — Need Advice</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Us More</label>
+          <textarea name="message" placeholder="How many units do you need? Any size requirements? Anything else we should know?"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Enquiry — Get a Free Quote →</button>
+        <p class="form-note">We'll respond same day during business hours. No spam, no hard sell.</p>
+        <div class="success-msg" id="successMsg">
+          ✅ Thanks! We've received your enquiry and will be in touch same day.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-logo">DCR LTD</div>
+    <div class="foot-tagline">Commercial Chillers &amp; Refrigeration Specialists</div>
+  </div>
+  <div class="foot-links">
+    <a href="#enquire">Get a Quote</a>
+    <a href="mailto:service@commercialchillers.co.uk">Email</a>
+      <a href="https://commercialchillers.vercel.app/admin" style="color: #4b5563;">Admin Login</a>
+  </div>
+  <div class="foot-copy">© 2026 DCR Ltd · All rights reserved </div>
+</footer>
+
+<script>
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.form-submit');
+  const data = new FormData(form);
+  const obj = Object.fromEntries(data);
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://dcr-checkout.vercel.app/api/enquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(obj)
+    });
+
+    if (res.ok) {
+      document.getElementById('successMsg').style.display = 'block';
+      btn.textContent = '✓ Enquiry Sent';
+      btn.style.background = '#059669';
+      form.reset();
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (err) {
+    // Fallback to mailto if API fails
+    const subject = encodeURIComponent(`Refrigeration Enquiry — ${obj.business || obj.name}`);
+    const body = encodeURIComponent(
+      `New enquiry from ${obj.name}\n` +
+      `Business: ${obj.business}\n` +
+      `Phone: ${obj.phone}\n` +
+      `Email: ${obj.email}\n` +
+      `Equipment: ${obj.equipment_type}\n\n` +
+      `Message:\n${obj.message}`
+    );
+    window.location.href = `mailto:service@commercialchillers.co.uk?subject=${subject}&body=${body}`;
+    btn.textContent = 'Send Enquiry';
+    btn.disabled = false;
+  }
+}
+
+// ── PRODUCT MODAL ──────────────────────────────────────────
+const products = {
+
+  'bim40': {
+    name: 'Blizzard BIM40 Ice Maker',
+    subtitle: 'Integral Ice Maker (40kg)',
+    img: 'images/bim40.jpg',
+    variants: [
+      { name: 'BIM40 - Air Cooled', price: '£778' }
+    ],
+    specs: [
+      ['Type', 'Undercounter Ice Maker'],
+      ['Production', '40kg per 24hrs'],
+      ['Storage Bin', '15kg insulated bin'],
+      ['Ice Type', 'Cubed'],
+      ['Refrigerant', 'R290'],
+      ['Dimensions', '500mm (W) x 580mm (D) x 800mm (H)']
+    ],
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Water Filter Kit', price: '£250' },
+      { name: 'Waste Condensate Pump', price: '£300' }
+    ]
+  },
+  'bim160': {
+    name: 'Blizzard BIM160 Ice Maker',
+    subtitle: 'Modular Ice Maker (159kg)',
+    img: 'images/bim160.jpg',
+    variants: [
+      { name: 'BIM160 - Air Cooled', price: '£2,298' }
+    ],
+    specs: [
+      ['Type', 'Modular Ice Maker with Bin'],
+      ['Production', '159kg per 24hrs'],
+      ['Storage Bin', '125kg capacity bin included'],
+      ['Ice Type', 'Cubed'],
+      ['Refrigerant', 'R290'],
+      ['Dimensions', '760mm (W) x 820mm (D) x 1670mm (H) - including bin']
+    ],
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Water Filter Kit', price: '£250' },
+      { name: 'Waste Condensate Pump', price: '£300' }
+    ]
+  },
+  'bim230': {
+    name: 'Blizzard BIM230 Ice Maker',
+    subtitle: 'High Capacity Ice Maker (227kg)',
+    img: 'images/bim230.jpg',
+    variants: [
+      { name: 'BIM230 - Air Cooled', price: '£2,742' }
+    ],
+    specs: [
+      ['Type', 'Modular Ice Maker with Bin'],
+      ['Production', '227kg per 24hrs'],
+      ['Storage Bin', '175kg capacity bin included'],
+      ['Ice Type', 'Cubed'],
+      ['Refrigerant', 'R290'],
+      ['Dimensions', '760mm (W) x 820mm (D) x 1670mm (H) - including bin']
+    ],
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Water Filter Kit', price: '£250' },
+      { name: 'Waste Condensate Pump', price: '£300' }
+    ]
+  },
+
+  'mpt601': {
+    name: 'Precision MPT 601',
+    subtitle: 'Upright Cabinet — Single Door',
+    img: 'images/mpt601.jpg',
+    variants: [
+      { name: 'MPT 601 — Fridge -2/+4°C', price: '£2,582' },
+      { name: 'LPT 601 — Freezer -18/-22°C', price: '£3,029' },
+    ],
+    specs: [
+      ['Type', 'Top Mounted GN2/1 Upright Cabinet'],
+      ['Temperature', '-2/+4°C (fridge) · -18/-22°C (freezer)'],
+      ['Capacity', 'GN2/1'],
+      ['Doors', '1 × solid door'],
+      ['Width', '720 mm'],
+      ['Depth', '850 mm'],
+      ['Height', '2072 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Supplied with shelf & slides set.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Shelf & slides set',                                            price: '£106'   },
+      { name: 'St/st shelf & slides set',                                      price: '£220'   },
+      { name: 'Tray slides pair',                                              price: '£53'    },
+      { name: '600×400 bakery racking — 20 pairs of tray slides',             price: '£1,560' },
+      { name: 'Fish shelving — 8× GN2/1 s/s pans & slides with slime trays', price: '£1,786' },
+      { name: 'Stainless steel back',                                          price: '£220'   },
+      { name: 'Left hand hinged door',                                         price: 'Included' },
+      { name: 'Adjustable legs',                                               price: 'Included' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)',       price: '£495'   },,
+    ]
+  },
+  'mcu211': {
+    name: 'Precision MCU 211',
+    subtitle: 'Gastronorm Counter — 2 Door',
+    img: 'images/mcu211.jpg',
+    variants: [
+      { name: 'MCU 211 — Fridge -2/+4°C', price: '£4,170' },
+      { name: 'LCU 211 — Freezer -18/-22°C', price: '£4,710' },
+    ],
+    specs: [
+      ['Type', 'Gastronorm Counter 670 Series GN1/1'],
+      ['Temperature', '-2/+4°C (fridge) · -18/-22°C (freezer)'],
+      ['Doors', '2 × solid doors'],
+      ['Width', '1350 mm'],
+      ['Depth', '670 mm'],
+      ['Height', '865 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'GN pans not included. Multiple worktop and drawer options available.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Shelf & slides set',                          price: '£94'    },
+      { name: 'St/st shelf & slides set',                    price: '£184'   },
+      { name: 'Tray slides pair',                            price: '£53'    },
+      { name: 'Bank of 2 drawers (H)',                       price: '£749'   },
+      { name: 'Bank of 3 drawers (T)',                       price: '£1,219' },
+      { name: 'Gastronorm pan bridging bar',                 price: '£30'    },
+      { name: '900mm counter height',                        price: '£284'   },
+      { name: 'Raised pan holder 1/4°C (4× GN1/3)',         price: '£1,239' },
+      { name: 'Countertop well 1/4°C (4× GN1/3)',           price: '£1,045' },
+      { name: 'Insulated well/pan lid',                      price: '£664'   },
+      { name: 'Extra deep worktop up to 250mm',              price: '£357'   },
+      { name: 'Extra wide worktop up to 250mm',              price: '£658'   },
+      { name: 'Splash back 55mm one piece',                  price: '£990'   },
+      { name: 'Splash back 55mm bolt-on',                    price: '£330'   },
+      { name: 'Right hand condensing unit',                  price: '£166'   },
+      { name: 'Door/drawer lock (each)',                     price: '£40'    },
+      { name: 'Stainless steel back & unit housing',         price: '£284'   },
+      { name: 'Precision Connect — WiFi cloud monitoring',   price: '£495'   },,
+    ]
+  },
+  'mcu311': {
+    name: 'Precision MCU 311',
+    subtitle: 'Gastronorm Counter — 3 Door',
+    img: 'images/mcu311.jpg',
+    variants: [
+      { name: 'MCU 311 — Fridge -2/+4°C', price: '£4,845' },
+      { name: 'LCU 311 — Freezer -18/-22°C', price: '£5,485' },
+    ],
+    specs: [
+      ['Type', 'Gastronorm Counter 670 Series GN1/1'],
+      ['Temperature', '-2/+4°C (fridge) · -18/-22°C (freezer)'],
+      ['Doors', '3 × solid doors'],
+      ['Width', '1800 mm'],
+      ['Depth', '670 mm'],
+      ['Height', '865 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'GN pans not included. Multiple worktop and drawer options available.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Shelf & slides set',                          price: '£94'    },
+      { name: 'St/st shelf & slides set',                    price: '£184'   },
+      { name: 'Tray slides pair',                            price: '£53'    },
+      { name: 'Bank of 2 drawers (H)',                       price: '£749'   },
+      { name: 'Bank of 3 drawers (T)',                       price: '£1,219' },
+      { name: 'Gastronorm pan bridging bar',                 price: '£30'    },
+      { name: '900mm counter height',                        price: '£284'   },
+      { name: 'Raised pan holder 1/4°C (5× GN1/3)',         price: '£1,461' },
+      { name: 'Countertop well 1/4°C (7× GN1/3)',           price: '£1,257' },
+      { name: 'Insulated well/pan lid',                      price: '£718'   },
+      { name: 'Extra deep worktop up to 250mm',              price: '£357'   },
+      { name: 'Extra wide worktop up to 250mm',              price: '£658'   },
+      { name: 'Splash back 55mm one piece',                  price: '£1,113' },
+      { name: 'Splash back 55mm bolt-on',                    price: '£371'   },
+      { name: 'Right hand condensing unit',                  price: '£166'   },
+      { name: 'Door/drawer lock (each)',                     price: '£40'    },
+      { name: 'Stainless steel back & unit housing',         price: '£328'   },
+      { name: 'Precision Connect — WiFi cloud monitoring',   price: '£495'   },,
+    ]
+  },
+  'mcu411': {
+    name: 'Precision MCU 411',
+    subtitle: 'Gastronorm Counter — 4 Door',
+    img: 'images/mcu411.jpg',
+    variants: [
+      { name: 'MCU 411 — Fridge -2/+4°C', price: '£5,590' },
+    ],
+    specs: [
+      ['Type', 'Gastronorm Counter 670 Series GN1/1'],
+      ['Temperature', '-2/+4°C'],
+      ['Doors', '4 × solid doors'],
+      ['Width', '2250 mm'],
+      ['Depth', '670 mm'],
+      ['Height', '865 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Fridge only — no freezer version available. GN pans not included.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Shelf & slides set',                          price: '£94'    },
+      { name: 'St/st shelf & slides set',                    price: '£184'   },
+      { name: 'Tray slides pair',                            price: '£53'    },
+      { name: 'Bank of 2 drawers (H)',                       price: '£749'   },
+      { name: 'Bank of 3 drawers (T)',                       price: '£1,219' },
+      { name: 'Gastronorm pan bridging bar',                 price: '£30'    },
+      { name: '900mm counter height',                        price: '£284'   },
+      { name: 'Raised pan holder 1/4°C (6× GN1/3)',         price: '£1,657' },
+      { name: 'Countertop well 1/4°C (9× GN1/3)',           price: '£1,459' },
+      { name: 'Insulated well/pan lid',                      price: '£838'   },
+      { name: 'Extra deep worktop up to 250mm',              price: '£357'   },
+      { name: 'Splash back 55mm one piece',                  price: '£1,221' },
+      { name: 'Splash back 55mm bolt-on',                    price: '£407'   },
+      { name: 'Right hand condensing unit',                  price: '£166'   },
+      { name: 'Door/drawer lock (each)',                     price: '£40'    },
+      { name: 'Stainless steel back & unit housing',         price: '£372'   },
+      { name: 'Precision Connect — WiFi cloud monitoring',   price: '£495'   },,
+    ]
+  },
+  'hpu150': {
+    name: 'Precision HPU 150',
+    subtitle: 'Undercounter — Single Door',
+    img: 'images/hpu150.jpg',
+    variants: [
+      { name: 'HPU 150 — Fridge 1/4°C', price: '£1,830' },
+      { name: 'LPU 150 — Freezer -18/-22°C', price: '£1,830' },
+    ],
+    specs: [
+      ['Type', 'Undercounter Cabinet — 32°C Ambient'],
+      ['Temperature', '1/4°C (fridge) · -18/-22°C (freezer)'],
+      ['Doors', '1 × solid door'],
+      ['Width', '600 mm'],
+      ['Depth', '640 mm'],
+      ['Height', '820 mm'],
+      ['Ventilation', 'Requires rear and top ventilation'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'This unit requires rear and top ventilation.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Shelf & clips set',                                         price: '£79'  },
+      { name: 'Stacking kit',                                              price: '£181' },
+      { name: 'Castors (+62mm height)',                                    price: '£134' },
+      { name: 'Left hand hinged door',                                     price: 'Included' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)',  price: '£495' },,
+    ]
+  },
+  'vubc1212': {
+    name: 'Precision VUBC 121-2',
+    subtitle: 'Variable Temperature Drawer — Double Stack',
+    img: 'images/vubc121-2.jpg',
+    variants: [
+      { name: 'VUBC 121-2 — Variable -22/+4°C', price: '£4,901' },
+    ],
+    specs: [
+      ['Type', 'Variable Temperature Drawer — Double Stack'],
+      ['Temperature', '-22/+4°C (variable)'],
+      ['Width', '1100 mm'],
+      ['Depth', '675 mm'],
+      ['Height', '760 mm'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Double stacked variable temperature drawer units. Each drawer independently controlled.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Castors (+72mm height)',                                   price: '£134' },
+      { name: 'Heat resistant worktop (+29mm height, +25mm depth)',       price: '£554' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495' },,
+    ]
+  },
+  'bbs900': {
+    name: 'Precision BBS 900',
+    subtitle: 'Two Door Bottle Cooler',
+    img: 'images/bbs900.jpg',
+    variants: [
+      { name: 'BBS 900 — Fridge 3/15°C', price: '£2,131' },
+    ],
+    specs: [
+      ['Type', 'Two Door Bottle Cooler'],
+      ['Temperature', '3/15°C'],
+      ['Doors', '2 × glass doors (standard)'],
+      ['Width', '900 mm'],
+      ['Depth', '500 mm'],
+      ['Height', '900 mm'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Standard height 900mm. 845mm and 800mm height options available.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: '845mm height',                                              price: 'Included' },
+      { name: '800mm height',                                              price: '£146'  },
+      { name: 'Solid doors',                                               price: 'Included' },
+      { name: 'Frame door for wood cladding',                              price: '£75'   },
+      { name: 'Bank of glass drawers (900H only)',                         price: '£1,035'},
+      { name: 'Bank of solid drawers (900H only)',                         price: '£935'  },
+      { name: 'Coloured plastisol — door & grille',                        price: '£102'  },
+      { name: 'Painted any RAL — door & grille',                           price: '£601'  },
+      { name: 'Tropicalised 43°C ambient triple glazed (TBBS)',            price: '£562'  },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)',  price: '£495'  },,
+    ]
+  },
+  'bbs600': {
+    name: 'Precision BBS 600',
+    subtitle: 'Single Door Bottle Cooler',
+    img: 'images/bbs600.jpg',
+    variants: [
+      { name: 'BBS 600 — Fridge 3/15°C', price: '£1,416' },
+    ],
+    specs: [
+      ['Type', 'Single Door Bottle Cooler'],
+      ['Temperature', '3/15°C'],
+      ['Doors', '1 × glass door (standard)'],
+      ['Width', '600 mm'],
+      ['Depth', '500 mm'],
+      ['Height', '900 mm'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Standard height 900mm. 845mm and 800mm height options available.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: '845mm height',                                              price: 'Included' },
+      { name: '800mm height',                                              price: '£146'  },
+      { name: 'Solid doors',                                               price: 'Included' },
+      { name: 'Frame door for wood cladding',                              price: '£75'   },
+      { name: 'Bank of glass drawers (900H only)',                         price: '£1,035'},
+      { name: 'Bank of solid drawers (900H only)',                         price: '£935'  },
+      { name: 'Coloured plastisol — door & grille',                        price: '£102'  },
+      { name: 'Painted any RAL — door & grille',                           price: '£601'  },
+      { name: 'Painted — grille only',                                     price: '£170'  },
+      { name: 'Coloured plastisol — grille only',                          price: '£25'   },
+      { name: 'Tropicalised 43°C ambient triple glazed (TBBS)',            price: '£562'  },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)',  price: '£495'  },,
+    ]
+  },
+  'pcf52': {
+    name: 'Precision PCF 52',
+    subtitle: 'Blast Chiller / Freezer Cabinet',
+    img: 'images/pcf52.jpg',
+    variants: [
+      { name: 'PCF 52 — Blast Chiller/Freezer', price: '£8,676' },
+    ],
+    specs: [
+      ['Type', 'Blast Chiller / Freezer Cabinet'],
+      ['Function', 'Blast chill and blast freeze'],
+      ['Width', '715 mm'],
+      ['Depth', '715 mm'],
+      ['Height', '1910 mm'],
+      ['Ventilation', '100mm rear ventilation gap required'],
+      ['Tray Compatibility', 'GN1/1 & 600×400 trays'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Supplied with tray slides only. Accepts GN1/1 & 600×400 trays.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Left hand hinged door',                                    price: 'Included' },
+      { name: 'Adjustable legs',                                          price: 'Included' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495'     },,
+    ]
+  },
+  'pps209': {
+    name: 'Precision PPS 209',
+    subtitle: 'Pizza Prep Station — 2 Door',
+    img: 'images/pps209.jpg',
+    variants: [
+      { name: 'PPS 209 — Fridge 1/4°C', price: '£9,640' },
+    ],
+    specs: [
+      ['Type', 'Pizza Prep Station'],
+      ['Temperature', '1/4°C'],
+      ['Doors', '2 × solid doors'],
+      ['Width', '1755 mm'],
+      ['Depth', '925 mm'],
+      ['Height', '1238 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Fridge only. Features hinged lid, pizza stone shelf and full GN pan section. Dual condensing units.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Overshelf with keyboard holder',                           price: '£1,110' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£990'   },,
+    ]
+  },
+  'ppc410': {
+    name: 'Precision PPC 410',
+    subtitle: 'Refrigerated Prep Counter — 4 Door',
+    img: 'images/ppc410.jpg',
+    variants: [
+      { name: 'PPC 410 — Fridge 1/4°C', price: '£6,545' },
+    ],
+    specs: [
+      ['Type', 'Refrigerated Prep Counter'],
+      ['Temperature', '1/4°C'],
+      ['Doors', '4 × solid doors'],
+      ['Width', '1900 mm'],
+      ['Depth', '920 mm'],
+      ['Height', '1085 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Fridge only. GN pans not included. Largest in the prep counter range.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Door/drawer locks (each)',                                  price: '£40'    },
+      { name: 'Bank of 2 drawers H (200/200mm depth)',                    price: '£749'   },
+      { name: 'Bank of 3 drawers T (100/130/130mm depth)',                price: '£1,219' },
+      { name: 'GN1/3 pan set',                                            price: '£822'   },
+      { name: 'Stainless steel back',                                     price: '£696'   },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495'   },,
+    ]
+  },
+  'ppc307': {
+    name: 'Precision PPC 307',
+    subtitle: 'Refrigerated Prep Counter — 3 Door',
+    img: 'images/ppc307.jpg',
+    variants: [
+      { name: 'PPC 307 — Fridge 1/4°C', price: '£6,203' },
+    ],
+    specs: [
+      ['Type', 'Refrigerated Prep Counter'],
+      ['Temperature', '1/4°C'],
+      ['Doors', '3 × solid doors'],
+      ['Width', '1430 mm'],
+      ['Depth', '920 mm'],
+      ['Height', '1085 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Fridge only. GN pans not included.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Door/drawer locks (each)',                                  price: '£40'    },
+      { name: 'Bank of 2 drawers H (200/200mm depth)',                    price: '£749'   },
+      { name: 'Bank of 3 drawers T (100/130/130mm depth)',                price: '£1,219' },
+      { name: 'GN1/3 pan set',                                            price: '£576'   },
+      { name: 'Stainless steel back',                                     price: '£567'   },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495'   },,
+    ]
+  },
+  'hss340prep': {
+    name: 'Precision HSS 340 PREP',
+    subtitle: 'Space Saving Prep Counter',
+    img: 'images/hss340prep.jpg',
+    variants: [
+      { name: 'HSS 340 PREP — Fridge 1/4°C', price: '£4,414' },
+    ],
+    specs: [
+      ['Type', 'Space Saving Prep Counter'],
+      ['Temperature', '1/4°C'],
+      ['Doors', '2 × solid doors'],
+      ['Width', '1220 mm'],
+      ['Depth', '745 mm'],
+      ['Height', '990 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Fridge only. GN pans not included.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'St/st shelf & slides set',                                 price: '£94'  },
+      { name: 'Bank of 2 drawers (150/150mm depth)',                      price: '£749' },
+      { name: 'Stainless steel back',                                     price: '£284' },
+      { name: 'GN1/3 pan set',                                            price: '£493' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495' },,
+    ]
+  },
+  'vubc121': {
+    name: 'Precision VUBC 121',
+    subtitle: 'Variable Temperature Drawer',
+    img: 'images/vubc121.jpg',
+    variants: [
+      { name: 'VUBC 121 — Variable -22/+4°C', price: '£2,641' },
+    ],
+    specs: [
+      ['Type', 'Variable Temperature Drawer'],
+      ['Temperature', '-22/+4°C (variable)'],
+      ['Width', '1100 mm'],
+      ['Depth', '675 mm'],
+      ['Height', '380 mm'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Unique variable temperature — use as a fridge or freezer. Ideal as an under-broiler unit.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Castors (+72mm height)',                                   price: '£134' },
+      { name: 'Heat resistant worktop (+29mm height, +25mm depth)',       price: '£554' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495' },,
+    ]
+  },
+  'hpu153': {
+    name: 'Precision HPU 153',
+    subtitle: 'Undercounter — 3 Drawer',
+    img: 'images/hpu153.jpg',
+    variants: [
+      { name: 'HPU 153 — Fridge 1/4°C', price: '£3,125' },
+    ],
+    specs: [
+      ['Type', 'Undercounter 3 Drawer — 32°C Ambient'],
+      ['Temperature', '1/4°C'],
+      ['Drawers', '3 × solid drawers'],
+      ['Width', '600 mm'],
+      ['Depth', '640 mm'],
+      ['Height', '820 mm'],
+      ['Ventilation', 'Requires rear and top ventilation'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Fridge only — no freezer version. Requires rear and top ventilation.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Castors (+62mm height)',                                   price: '£134' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495' },,
+    ]
+  },
+  'hpu152': {
+    name: 'Precision HPU 152',
+    subtitle: 'Undercounter — 2 Drawer',
+    img: 'images/hpu152.jpg',
+    variants: [
+      { name: 'HPU 152 — Fridge 1/4°C', price: '£2,755' },
+    ],
+    specs: [
+      ['Type', 'Undercounter 2 Drawer — 32°C Ambient'],
+      ['Temperature', '1/4°C'],
+      ['Drawers', '2 × solid drawers'],
+      ['Width', '600 mm'],
+      ['Depth', '640 mm'],
+      ['Height', '820 mm'],
+      ['Ventilation', 'Requires rear and top ventilation'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Fridge only — no freezer version. Requires rear and top ventilation.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Castors (+62mm height)',                                   price: '£134' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)', price: '£495' },,
+    ]
+  },
+  'mpu401': {
+    name: 'Precision MPU 401',
+    subtitle: 'Slimline Upright Cabinet — Single Door',
+    img: 'images/mpu401.jpg',
+    variants: [
+      { name: 'MPU 401 — Fridge -2/+4°C', price: '£2,413' },
+      { name: 'LPU 401 — Freezer -18/-22°C', price: '£2,968' },
+    ],
+    specs: [
+      ['Type', 'Bottom Mounted Slimline Upright Cabinet'],
+      ['Temperature', '-2/+4°C (fridge) · -18/-22°C (freezer)'],
+      ['Capacity', 'GN1/1'],
+      ['Doors', '1 × solid door'],
+      ['Width', '600 mm'],
+      ['Depth', '705 mm'],
+      ['Height', '1985 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Slimline design — ideal where space is limited. Bottom mounted condensing unit.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Shelf & slides set',                                            price: '£94'    },
+      { name: 'Tray slides pair',                                              price: '£53'    },
+      { name: 'Fish shelving — 7× GN1/1 s/s pans & slides with slime trays', price: '£1,345' },
+      { name: 'Stainless steel back',                                          price: '£220'   },
+      { name: 'Left hand hinged door',                                         price: 'Included' },
+      { name: 'Adjustable legs',                                               price: 'Included' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)',       price: '£495'   },,
+    ]
+  },
+  'mpt1401': {
+    name: 'Precision MPT 1401',
+    subtitle: 'Upright Cabinet — Double Door',
+    img: 'images/mpt1401.jpg',
+    variants: [
+      { name: 'MPT 1401 — Fridge -2/+4°C', price: '£3,653' },
+      { name: 'LPT 1401 — Freezer -18/-22°C', price: '£4,566' },
+    ],
+    specs: [
+      ['Type', 'Top Mounted GN2/1 Upright Cabinet'],
+      ['Temperature', '-2/+4°C (fridge) · -18/-22°C (freezer)'],
+      ['Capacity', 'GN2/1 × 2 sections'],
+      ['Doors', '2 × solid doors'],
+      ['Width', '1440 mm'],
+      ['Depth', '850 mm'],
+      ['Height', '2072 mm'],
+      ['Castors', 'Included as standard'],
+      ['Exterior', 'Stainless steel throughout'],
+    ],
+    notes: 'Supplied with shelf & slides set.',
+    accessories: [
+      { name: 'Removal of old system', price: '£150' },
+      { name: 'Shelf & slides set',                                            price: '£106'   },
+      { name: 'St/st shelf & slides set',                                      price: '£220'   },
+      { name: 'Tray slides pair',                                              price: '£53'    },
+      { name: '600×400 bakery racking — 20 pairs of tray slides per door',    price: '£3,122' },
+      { name: 'Fish shelving — 8× GN2/1 s/s pans & slides with slime trays', price: '£3,573' },
+      { name: 'Stainless steel back',                                          price: '£442'   },
+      { name: 'Adjustable legs',                                               price: 'Included' },
+      { name: 'Precision Connect — WiFi cloud monitoring (lifetime sub)',       price: '£495'   },,
+    ]
+  },
+};
+
+function openModal(id) {
+  const p = products[id];
+  if (!p) return;
+  const variantHTML = p.variants.map(v => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;">
+      <span style="font-size:14px;font-weight:600;color:var(--text);">${v.name}</span>
+      <span style="font-size:16px;font-weight:700;color:#1d6fac;">${v.price}</span>
+    </div>`).join('');
+  const specHTML = p.specs.map(([k,v]) => `
+    <tr>
+      <td style="padding:8px 12px 8px 0;font-size:13px;font-weight:600;color:var(--text-mid);white-space:nowrap;vertical-align:top;">${k}</td>
+      <td style="padding:8px 0;font-size:13px;color:var(--text);line-height:1.5;">${v}</td>
+    </tr>`).join('');
+
+  const accessoryHTML = p.accessories ? p.accessories.map((a, i) => {
+    const isPurchasable = a.price !== 'Included' && a.price !== '£0';
+    const safeId = `acc_${id}_${i}`;
+    return `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f5f5f5;gap:12px;">
+      <div style="display:flex;align-items:center;gap:10px;flex:1;">
+        ${isPurchasable ? `<input type="checkbox" id="${safeId}" data-acc-index="${i}" style="width:16px;height:16px;cursor:pointer;accent-color:#1d6fac;flex-shrink:0;">` : `<span style="width:16px;flex-shrink:0;"></span>`}
+        <label for="${safeId}" style="font-size:13px;color:var(--text);cursor:${isPurchasable?'pointer':'default'};">${a.name}</label>
+      </div>
+      <span style="font-size:13px;font-weight:700;color:${isPurchasable?'#1d6fac':'#16a34a'};white-space:nowrap;">${a.price === '£0' ? 'Included' : a.price}</span>
+    </div>`;
+  }).join('') : '';
+
+  document.getElementById('modal-inner').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+      <div>
+        <img src="${p.img}" alt="${p.name}" style="width:100%;border-radius:10px;background:var(--off-white);padding:16px;object-fit:contain;max-height:340px;">
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1d6fac;margin-bottom:6px;">Precision Refrigeration</div>
+        <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px;">${p.name}</h2>
+        <p style="font-size:14px;color:var(--text-light);margin-bottom:20px;">${p.subtitle}</p>
+        <div style="margin-bottom:16px;">${variantHTML}</div>
+        ${p.variants.length > 1 ? `
+        <div style="margin-bottom:14px;">
+          <label style="font-size:12px;font-weight:700;color:var(--text-mid);display:block;margin-bottom:6px;">Select variant:</label>
+          <select id="modal-variant-select" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;color:#0f172a;background:var(--white);cursor:pointer;">
+            ${p.variants.map((v,i) => `<option value="${i}">${v.name} — ${v.price}</option>`).join('')}
+          </select>
+        </div>` : `<input type="hidden" id="modal-variant-select" value="0">`}
+        <div style="font-size:11px;color:#aaa;margin-bottom:16px;">All prices ex. VAT</div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="buyNow('${id}')" style="flex:1;background:#1d6fac;color:#fff;border:none;border-radius:8px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;">🛒 Add to Basket</button>
+          ${p.accessories ? `<button onclick="toggleAccessories()" id="acc-btn" style="flex:1;background:#f0f6ff;color:#1d6fac;border:2px solid #1d6fac;border-radius:8px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;">Accessories ▾</button>` : ''}
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:28px;border-top:1px solid var(--border);padding-top:24px;">
+      <h3 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:12px;">Specifications</h3>
+      <table style="width:100%;border-collapse:collapse;">${specHTML}</table>
+      ${p.notes ? `<p style="margin-top:12px;font-size:12px;color:#aaa;font-style:italic;">${p.notes}</p>` : ''}
+    </div>
+    ${p.accessories ? `
+    <div id="acc-panel" style="display:block;margin-top:0;border-top:1px solid var(--border);padding-top:24px;">
+      <h3 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:4px;">Optional Accessories</h3>
+      <p style="font-size:12px;color:#aaa;margin-bottom:12px;">Tick any accessories to add to basket — prices ex. VAT</p>
+      ${accessoryHTML}
+    </div>` : ''}
+  `;
+  document.getElementById('product-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('product-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function toggleAccessories() {
+  const panel = document.getElementById('acc-panel');
+  const btn = document.getElementById('acc-btn');
+  const open = panel.style.display === 'block';
+  panel.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? 'Accessories ▾' : 'Accessories ▴';
+  if (!open) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ── BASKET ──────────────────────────────────────────────
+
+// 🌗 THEME TOGGLE 🌗
+function initTheme() {
+  const currentTheme = localStorage.getItem('dcrTheme');
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    const btn = document.getElementById('theme-btn');
+    if(btn) btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  }
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const target = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', target);
+  localStorage.setItem('dcrTheme', target);
+  const btn = document.getElementById('theme-btn');
+  if(btn) btn.textContent = target === 'dark' ? '☀️' : '🌙';
+}
+initTheme();
+
+let basket = JSON.parse(localStorage.getItem('dcrBasket') || '[]');
+
+function saveBasket() {
+  localStorage.setItem('dcrBasket', JSON.stringify(basket));
+  renderBasket();
+}
+
+function parsePence(priceStr) {
+  return Math.round(parseFloat(priceStr.replace(/[£,]/g, '')) * 100);
+}
+
+function buyNow(id) {
+  const p = products[id];
+  if (!p) return;
+
+  // Main product variant
+  const sel = document.getElementById('modal-variant-select');
+  const idx = sel ? parseInt(sel.value) || 0 : 0;
+  const variant = p.variants[idx] || p.variants[0];
+  const existing = basket.find(i => i.id === id && i.variant === variant.name);
+  if (existing) {
+    existing.qty++;
+  } else {
+    basket.push({ id, name: p.name, variant: variant.name, pricePence: parsePence(variant.price), qty: 1 });
+  }
+
+  // Checked accessories
+  if (p.accessories) {
+    document.querySelectorAll('[data-acc-index]:checked').forEach(cb => {
+      const accIdx = parseInt(cb.dataset.accIndex);
+      const acc = p.accessories[accIdx];
+      if (!acc || acc.price === 'Included' || acc.price === '£0') return;
+      const accKey = `${id}_acc_${accIdx}`;
+      const accLabel = `${p.name} — ${acc.name}`;
+      const existingAcc = basket.find(i => i.id === accKey);
+      if (existingAcc) {
+        existingAcc.qty++;
+      } else {
+        basket.push({ id: accKey, name: accLabel, variant: '', pricePence: parsePence(acc.price), qty: 1 });
+      }
+    });
+  }
+
+  saveBasket();
+  closeModal();
+  openBasket();
+}
+
+function removeFromBasket(id, variant) {
+  basket = basket.filter(i => !(i.id === id && i.variant === variant));
+  saveBasket();
+}
+
+function changeQty(id, variant, delta) {
+  const item = basket.find(i => i.id === id && i.variant === variant);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) basket = basket.filter(i => !(i.id === id && i.variant === variant));
+  saveBasket();
+}
+
+function renderBasket() {
+  const count = basket.reduce((s, i) => s + i.qty, 0);
+  const total = basket.reduce((s, i) => s + i.pricePence * i.qty, 0);
+  // Button
+  const btn = document.getElementById('basket-btn');
+  btn.style.display = count > 0 ? 'flex' : 'none';
+  document.getElementById('basket-count').textContent = count;
+  // Total
+  document.getElementById('basket-total').textContent = '£' + (total / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 });
+  // Items
+  const el = document.getElementById('basket-items');
+  if (!basket.length) {
+    el.innerHTML = '<div class="basket-empty">Your basket is empty</div>';
+    return;
+  }
+  el.innerHTML = basket.map(item => `
+    <div class="basket-item">
+      <div class="basket-item-info">
+        <div class="basket-item-name">${item.name}</div>
+        <div class="basket-item-variant">${item.variant}</div>
+        <div class="basket-item-price">£${(item.pricePence / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}</div>
+        <div class="basket-item-qty">
+          <button class="qty-btn" onclick="changeQty('${item.id}','${item.variant.replace(/'/g,"\\'")}', -1)">−</button>
+          <span style="font-size:14px;font-weight:700;">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.id}','${item.variant.replace(/'/g,"\\'")}', 1)">+</button>
+          <button class="qty-btn" onclick="removeFromBasket('${item.id}','${item.variant.replace(/'/g,"\\'")}')">🗑</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openBasket() {
+  document.getElementById('basket-drawer').classList.add('open');
+  document.getElementById('basket-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBasket() {
+  document.getElementById('basket-drawer').classList.remove('open');
+  document.getElementById('basket-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+async function goToCheckout() {
+  if (!basket.length) return;
+  const btn = document.getElementById('checkout-btn');
+  btn.disabled = true;
+  btn.textContent = 'Redirecting…';
+  try {
+    const res = await fetch('https://dcr-checkout.vercel.app/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: basket })
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert('Something went wrong. Please email us at service@commercialchillers.co.uk.');
+      btn.disabled = false;
+      btn.textContent = 'Proceed to Checkout →';
+    }
+  } catch (e) {
+    alert('Something went wrong. Please email us at service@commercialchillers.co.uk.');
+    btn.disabled = false;
+    btn.textContent = 'Proceed to Checkout →';
+  }
+}
+
+// Init basket on load
+renderBasket();
+
+// Click category card → pre-select in form + scroll to it
+function selectCategory(type) {
+  const select = document.querySelector('select[name="equipment_type"]');
+  if (select) {
+    for (let opt of select.options) {
+      if (opt.value === type) { opt.selected = true; break; }
+    }
+  }
+  document.getElementById('enquire').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+
+<!-- PRODUCT MODAL -->
+<div id="product-modal" onclick="if(event.target===this)closeModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div class="modal-bg" style="background:var(--white);border-radius:16px;max-width:860px;width:100%;max-height:90vh;overflow-y:auto;position:relative;padding:32px;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:#f0f0f0;border:none;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;line-height:36px;text-align:center;">✕</button>
+    <div id="modal-inner"></div>
+  </div>
+</div>
+</body>
+</html>

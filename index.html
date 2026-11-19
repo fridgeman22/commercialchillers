@@ -46,7 +46,7 @@
     "logo": "https://www.commercialchillers.co.uk/images/dcr-logo-512.png",
     "image": "https://www.commercialchillers.co.uk/images/dcr-logo-512.png",
     "telephone": "+447928883860",
-    "email": "fridgeman22@googlemail.com",
+    "email": "service@commercialchillers.co.uk",
     "address": {
       "@type": "PostalAddress",
       "addressRegion": "England",
@@ -1274,7 +1274,7 @@
     <span class="contact-icon">✉️</span>
     <div>
       <div class="contact-label">Email Enquiries</div>
-      <a href="mailto:fridgeman22@googlemail.com" class="contact-val">fridgeman22@googlemail.com</a>
+      <a href="mailto:service@commercialchillers.co.uk" class="contact-val">service@commercialchillers.co.uk</a>
     </div>
   </div>
   <div style="width:1px;height:48px;background:var(--border);"></div>
@@ -1376,7 +1376,7 @@
   </div>
   <div class="foot-links">
     <a href="#enquire">Get a Quote</a>
-    <a href="mailto:fridgeman22@googlemail.com">Email</a>
+    <a href="mailto:service@commercialchillers.co.uk">Email</a>
       <a href="https://commercialchillers.vercel.app/admin" style="color: #4b5563;">Admin Login</a>
   </div>
   <div class="foot-copy">© 2026 DCR Ltd · All rights reserved </div>
@@ -1419,7 +1419,7 @@ async function handleSubmit(e) {
       `Equipment: ${obj.equipment_type}\n\n` +
       `Message:\n${obj.message}`
     );
-    window.location.href = `mailto:fridgeman22@googlemail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:service@commercialchillers.co.uk?subject=${subject}&body=${body}`;
     btn.textContent = 'Send Enquiry';
     btn.disabled = false;
   }
@@ -2168,12 +2168,12 @@ async function goToCheckout() {
     if (data.url) {
       window.location.href = data.url;
     } else {
-      alert('Something went wrong. Please email us at fridgeman22@googlemail.com.');
+      alert('Something went wrong. Please email us at service@commercialchillers.co.uk.');
       btn.disabled = false;
       btn.textContent = 'Proceed to Checkout →';
     }
   } catch (e) {
-    alert('Something went wrong. Please email us at fridgeman22@googlemail.com.');
+    alert('Something went wrong. Please email us at service@commercialchillers.co.uk.');
     btn.disabled = false;
     btn.textContent = 'Proceed to Checkout →';
   }

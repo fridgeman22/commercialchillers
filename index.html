@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JHX98T9NSJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-JHX98T9NSJ');
-  </script>
+  <!-- GA loaded conditionally on cookie consent -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -571,6 +564,18 @@
   🛒 Basket <span id="basket-count">0</span>
 </button>
 <a id="whatsapp-btn" href="https://wa.me/447928883860?text=Hi%2C%20I%20need%20help%20with%20a%20commercial%20refrigeration%20breakdown" target="_blank" rel="noopener">💬 WhatsApp Us</a>
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:10000;background:#0a0d10;border-top:2px solid rgba(37,137,199,0.4);padding:20px 48px;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;box-shadow:0 -4px 32px rgba(0,0,0,0.5);">
+  <div style="flex:1;min-width:280px;">
+    <div style="font-size:11px;font-weight:700;color:#7ec8e3;margin-bottom:6px;letter-spacing:2px;text-transform:uppercase;">🍪 Cookie Notice</div>
+    <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.65;margin:0;">We use analytics cookies to understand how visitors use this site. Click <strong style="color:#fff;">Accept</strong> to allow this, or <strong style="color:#fff;">Decline</strong> to browse without analytics. The site works fully either way.</p>
+  </div>
+  <div style="display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;">
+    <button onclick="acceptCookies()" style="background:#1d6fa4;color:#fff;border:none;padding:12px 28px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;">✓ Accept</button>
+    <button onclick="declineCookies()" style="background:transparent;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.15);padding:12px 20px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;">Decline</button>
+  </div>
+</div>
 
 <!-- BASKET OVERLAY -->
 <div id="basket-overlay" onclick="closeBasket()"></div>
@@ -2204,6 +2209,41 @@ function selectCategory(type) {
   }
   document.getElementById('enquire').scrollIntoView({ behavior: 'smooth' });
 }
+
+// ── COOKIE CONSENT ──────────────────────────────────────
+const _GA = 'G-JHX98T9NSJ';
+
+function loadGA() {
+  if (document.getElementById('_ga_script')) return;
+  const s = document.createElement('script');
+  s.id = '_ga_script'; s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + _GA;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ dataLayer.push(arguments); };
+  gtag('js', new Date()); gtag('config', _GA);
+}
+
+function acceptCookies() {
+  localStorage.setItem('dcrCookies', 'accepted');
+  document.getElementById('cookie-banner').style.display = 'none';
+  loadGA();
+}
+
+function declineCookies() {
+  localStorage.setItem('dcrCookies', 'declined');
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+
+(function() {
+  const pref = localStorage.getItem('dcrCookies');
+  if (pref === 'accepted') { loadGA(); }
+  else if (!pref) {
+    setTimeout(() => {
+      document.getElementById('cookie-banner').style.display = 'flex';
+    }, 800);
+  }
+})();
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {

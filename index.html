@@ -1959,7 +1959,7 @@ function closeBasket() {
   document.body.style.overflow = '';
 }
 
-async async function goToCheckout() {
+async function goToCheckout() {
   if (!basket.length) return;
   const btn = document.getElementById('checkout-btn');
   btn.disabled = true;
